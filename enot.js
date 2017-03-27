@@ -3,7 +3,45 @@
  * @author НАДМОЗГ
  * @version 0.9.9.9.9d
  */
+
+/**
+ * @name Enot
+ * @property {Number} age          
+ * Возраст енота (в годах)
+ * @property {Number} energy       
+ * Энергия енота (может меняться от 0 до 100 включительно)
+ * @property {number} hungry      
+ * Голоден ли енот (0 если голоден, 1 если нет, но это не точно)
+ * @property {number} insult 
+ * Степень обиженности енота. Может принимать одно из 
+ * значений от 0 до 6.
+ * @property {Number} personality
+ * Характер енота. Может принимать одно из значений 0, 1, 2. 
+ * 0 означает спокойный характер, 1 - беспокойный характер, 2 - жутко кипешной характер.
+ * @example 
+ * let enot = {
+ *   age: 3,
+ *   energy: 76,
+ *   hungry: 1,
+ *   personality: 2,
+ *   insult_level: 2
+ * }
+ */
+
 const enotprops = ['age', 'energy', 'personality', 'insult', 'hungry'];
+
+/**
+ * Валидация изменяемых параметров енота, чтобы они не могли увеличиваться\уменьшаться бесконечно и всегда
+ * были в рамках заданых значений.
+ * @param {object} enot 
+ * функция меняет текущего енота.
+ */
+function val(enot){
+    if (enot.energy < 0){enot.energy = 0;}
+    if (enot.energy >100){enot.energy = 100;}
+    if (enot.insult > 5){enot.insult = 5;}
+    if (enot.insult < 0){enot.insult = 0;}
+}
 
 function clone(obj) {
     return JSON.parse(JSON.stringify(obj));
@@ -59,97 +97,6 @@ function eq(enot, enotdva) {
     return true;
 }
 
-function tran(enot) {
-    let res = {};
-    res.age = enot.age;
-    res.energy = enot.energy;
-    switch (enot.hungry) {
-        case 1: res.hungry = true;
-            break;
-        case 0: res.hungry = false;
-            break;
-    }
-    switch (enot.personality) {
-        case 1: res.personality = 'Дзененот';
-            break;
-        case 2: res.personality = 'кипешной';
-            break;
-        case 3: res.personality = 'енотус неадекватус';
-            break;
-    }
-    switch (enot.insult) {
-        case 1: res.insult = 'необижен';
-            break;
-        case 2: res.insult = 'обижен';
-            break;
-        case 3: res.insult = 'ОБИДАЕБАНАЯ';
-            break;
-        case 4: res.insult = 'ой Фсе!';
-            break;
-        case 5: res.insult = 'енота разорвало от злости';
-            break;
-        case 0: res.insult = 'енот в коме';
-            break;
-        default: res.insult = 'error';
-    }
-    return res;
-}
-
-function nart(obj) {
-    res = {};
-    res.age = obj.age;
-    res.energy = obj.energy;
-    switch (obj.hungry) {
-        case true: res.hungry = 1;
-            break;
-        case false: res.hungry = 0;
-            break;
-    }
-
-    switch (obj.personality) {
-        case 'Дзененот': res.personality = 1;
-            break;
-        case 'кипешной': res.personality = 2;
-            break;
-        case 'енотус неадекватус': res.personality = 3;
-            break;
-    }
-    switch (obj.insult) {
-        case 'необижен': res.insult = 1;
-            break;
-        case 'обижен': res.insult = 2;
-            break;
-        case 'ОБИДАЕБАНАЯ': res.insult = 3;
-            break;
-        case 'ой Фсе!': res.insult = 4;
-            break;
-    }
-    return res;
-}
-/**
- * @name Enot
- * @property {Number} age          
- * Возраст енота (в годах)
- * @property {Number} energy       
- * Энергия енота (может меняться от 0 до 100 включительно)
- * @property {number} hungry      
- * Голоден ли енот (0 если голоден, 1 если нет, но это не точно)
- * @property {number} insult 
- * Степень обиженности енота. Может принимать одно из 
- * значений от 0 до 6.
- * @property {Number} personality
- * Характер енота. Может принимать одно из значений 0, 1, 2. 
- * 0 означает спокойный характер, 1 - беспокойный характер, 2 - жутко кипешной характер.
- * @example 
- * let enot = {
- *   age: 3,
- *   energy: 76,
- *   hungry: 1,
- *   personality: 2,
- *   insult_level: 2
- * }
- */
-
 /**
  * Покупка енота. Все, что мы можем указать - это диапазон возрастов енотов, среди которых
  * нам подберут енота. Если диапазон возраста меньше чем один
@@ -186,6 +133,7 @@ function enot_buy(min_age, max_age) {
  * енотов с personality 2 - на 2.
  * В случае успешного кормления (т.е. если енот был голоден) его энергия увеличивается на 20.
  * @param {Enot} enot 
+ * функция не меняет изначального енота а создает нового.
  */
 function enot_feed(enot) {
     let res = {};
@@ -215,6 +163,7 @@ function enot_feed(enot) {
  * При попытке поиграть с жутко кипешным енотом его уровень обиды 
  * либо понизится, либо повысится с 50% вероятностью.
  * Любой енот после игры теряет 10 энергии и с 30% вероятностью становится голоден.
+ * функция не меняет изначального енота, а создает нового.
  * @param {Enot} enot 
  */
 function enot_play(enot) {
