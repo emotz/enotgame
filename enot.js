@@ -33,14 +33,15 @@ const enotprops = ['age', 'energy', 'personality', 'insult', 'hungry'];
 /**
  * Валидация изменяемых параметров енота, чтобы они не могли увеличиваться\уменьшаться бесконечно и всегда
  * были в рамках заданых значений.
- * @param {object} enot 
+ * @param {Enot} enot 
  * функция меняет текущего енота.
  */
 function val(enot){
     if (enot.energy < 0){enot.energy = 0;}
     if (enot.energy >100){enot.energy = 100;}
-    if (enot.insult > 5){enot.insult = 5;}
+    if (enot.insult > 6){enot.insult = 6;}
     if (enot.insult < 0){enot.insult = 0;}
+    return enot;
 }
 
 function clone(obj) {
@@ -76,8 +77,8 @@ function erondondon(min, max) {
  * @returns {ComparEnot} обьект содержащий изменения енотов в цифровом виде , но это не точно.
  */
 function compare(enot, enotnew) {
-    let obj1 = nart(enot);
-    let obj2 = nart(enotnew);
+    let obj1 = enot;
+    let obj2 = enotnew;
     let res = {};
     for (let prop in obj1) {
         if (obj1[prop] !== obj2[prop]) {
@@ -103,7 +104,7 @@ function eq(enot, enotdva) {
  * год, магазин не принимает запрос (возвращает ошибку).
  * Все остальные его параметры случайны, за исключением следующего правила:
  * Если нам попался енот со спокойным характером, то его начальный
- * уровень обиды (insult) - 0. В противном случае уровень обиды случайный.
+ * уровень обиды (insult) - 0. В противном случае уровень обиды случайный но не равный нулю,И это неточно.
  * @param {Number} min_age Купленный енот будет не младше чем указанный возраст
  * @param {Number} max_age Купленный енот будет не старше чем указанный возраст
  * @returns {Enot|String} 
@@ -118,9 +119,9 @@ function enot_buy(min_age, max_age) {
         res.age = erondondon(min_age, max_age);
         res.energy = erondondon(1, 100);
         res.hungry = erondondon(0, 2);
-        res.personality = erondondon(1, 4);
-        if (res.personality === 1) { res.insult = 1; }
-        else { res.insult = erondondon(2, 4); }
+        res.personality = erondondon(0, 3);
+        if (res.personality === 0) { res.insult = 0; }
+        else { res.insult = erondondon(1, 7); }
     }
     return res;
 }
@@ -149,9 +150,9 @@ function enot_feed(enot) {
         res.hungry = 0;
         res.energy = enot.energy;
         res.insult = enot.insult + 1;
-        if (enot.personality === 3) { res.insult++; }
+        if (enot.personality === 2) { res.insult++; }
     }
-    return res;
+    return val(res);
 }
 
 /**
@@ -163,25 +164,26 @@ function enot_feed(enot) {
  * При попытке поиграть с жутко кипешным енотом его уровень обиды 
  * либо понизится, либо повысится с 50% вероятностью.
  * Любой енот после игры теряет 10 энергии и с 30% вероятностью становится голоден.
- * функция не меняет изначального енота, а создает нового.
+ * функция не меняет изначального енота,а создает нового, ннно это неточно.
  * @param {Enot} enot 
  */
 function enot_play(enot) {
-    if (enot.personality === 1) {
-        enot.insult--;
+    let res = clone(enot);
+    if (res.personality === 0) {
+        res.insult--;
     }
-    else if (enot.personality === 2) {
-        if (erondondon(1, 100) <= 50) { enot.insult--; }
-        else { enot.insult = enot.insult; }
+    else if (res.personality === 1) {
+        if (erondondon(1, 100) <= 50) { res.insult--; }
+        else { res.insult = res.insult; }
     }
-    else if (enot.personality === 3) {
-        if (erondondon(1, 100) <= 50) { enot.insult--; }
-        else { enot.insult++; }
+    else if (res.personality === 2) {
+        if (erondondon(1, 100) <= 50) { res.insult--; }
+        else { res.insult++; }
     }
-    if (erondondon(1, 100) <= 30) { enot.hungry = 1; }
-    else { enot.hungry = enot.hungry; }
-    enot.energy = enot.energy - 10;
-    return enot;
+    if (erondondon(1, 100) <= 30) { res.hungry = 1; }
+    else { res.hungry = res.hungry; }
+    res.energy = res.energy - 10;
+    return val(res);
 }
 
 ////////////////////////////////////////////////////////////////////////////exports///////////////////////////////////////////////////////////////////////////////////
@@ -196,7 +198,8 @@ module.exports = {
         erondondon: erondondon,
         eq: eq,
         tran: tran,
-        nart: nart
+        nart: nart,
+        val: val
     }
 };
 
