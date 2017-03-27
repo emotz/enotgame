@@ -68,3 +68,7 @@ button{
     padding: 20px;
     color: grey;
 }
+li {
+    list-style-type: none;
+    text-align: center;
+}

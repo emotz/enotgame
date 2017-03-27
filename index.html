@@ -57,22 +57,23 @@
             template: "#ready-id",
             props: ['enot'],
             data: function () {
-                return {    comres: 'Вы купили енота', 
-                            myEnot:this.enot, 
-                            new_enot:{}
-                        }
+                return {
+                    comres: ['Вы купили енота'],
+                    myEnot: this.enot,
+                    new_enot: {}
+                }
             },
             methods: {
                 enot_feed: function () {
                     this.myEnot = strToNum(this.myEnot);
                     this.new_enot = enot_feed(this.myEnot);
-                    this.comres=comres(compare(this.myEnot,this.new_enot));
+                    this.comres = comres(compare(this.myEnot, this.new_enot));
                     this.myEnot = numToStr(this.new_enot);
                 },
                 enot_play: function () {
                     this.myEnot = strToNum(this.myEnot);
                     this.new_enot = enot_play(this.myEnot);
-                    this.comres=comres(compare(this.myEnot,this.new_enot));
+                    this.comres = comres(compare(this.myEnot, this.new_enot));
                     this.myEnot = numToStr(this.new_enot);
                 },
                 create: function () {
@@ -98,7 +99,9 @@
                     <span v-if="enot.hungry">Enot is hungry!<br></span>
                 </p>
             </div>
-            <h1> {{ comres }} </h1>
+            <ul>
+                <li v-for="str in comres"> {{ str }} </li>
+            </ul>
         </div>
     </script>
 
