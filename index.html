@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Enots</title>
+    <script src="vue.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<script src="enot.js"></script>
+<script src="front_enot.js"></script>
+
+<body>
+    <div id="enot">
+        <create v-if="current=='create'" v-on:enot-buy="enot_buy"></create>
+        <ready v-else-if="current=='ready'" v-bind:enot="enot" v-on:create="current='create'"></ready>
+    </div>
+
+    <script>
+        var Create = {
+            template: "#create-id",
+            data: function () {
+                return { min_age: 1, max_age: 2 }
+            },
+            methods: {
+                enot_buy: function () {
+                    this.$emit('enot-buy', { max: this.max_age, min: this.min_age })
+                },
+                age_control: function () {
+                    if (this.min_age < 1) this.min_age = 1;
+                    if (this.max_age - this.min_age < 1)
+                        this.max_age = this.min_age * 1 + 1;
+                }
+            }
+        }
+    </script>
+    <script type="text/x-template" id="create-id">
+        <div id="create">
+            <div id="settings">
+                <div class="settings">
+                    <button type="button" v-on:click="enot_buy">Buy enot</button>
+                </div>
+                <div class="settings">
+                    <div class="age-1">
+                        Minimum age : <br> Maximum age :
+                    </div>
+                    <div class="age-2">
+                        <input type="number" v-model.number="min_age" v-on:click="age_control" v-on:keyup.enter="age_control">
+                        <input type="number" v-model.number="max_age" v-on:click="age_control" v-on:keyup.enter="age_control">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script>
+        var Ready = {
+            template: "#ready-id",
+            props: ['enot'],
+            data: function () {
+                return {
+                    comres: ['Вы купили енота'],
+                    myEnot: this.enot,
+                    new_enot: {}
+                }
+            },
+            methods: {
+                enot_feed: function () {
+                    this.myEnot = strToNum(this.myEnot);
+                    this.new_enot = enot_feed(this.myEnot);
+                    this.comres = comres(compare(this.myEnot, this.new_enot));
+                    this.myEnot = numToStr(this.new_enot);
+                },
+                enot_play: function () {
+                    this.myEnot = strToNum(this.myEnot);
+                    this.new_enot = enot_play(this.myEnot);
+                    this.comres = comres(compare(this.myEnot, this.new_enot));
+                    this.myEnot = numToStr(this.new_enot);
+                },
+                create: function () {
+                    this.$emit('create');
+                },
+            }
+
+        }
+    </script>
+    <script type="text/x-template" id="ready-id">
+        <div>
+            <div class="enot">
+                <li v-for="(item, index) in myEnot">{{index}} : {{item}}</li>
+            </div>
+            <div class="enot">
+                <button v-on:click="enot_feed">Feed</button>
+                <button v-on:click="enot_play">Play</button>
+            </div>
+            <div class="enot">
+                <p>Important messages:</p><br>
+                <p>
+                    <span v-if="enot.energy<30">Energy is low!<br></span>
+                    <span v-if="enot.hungry">Enot is hungry!<br></span>
+                </p>
+            </div>
+            <ul>
+                <li v-for="str in comres"> {{ str }} </li>
+            </ul>
+        </div>
+    </script>
+
+    <script>
+        var enot = new Vue({
+            el: "#enot",
+            data: {
+                current: 'create',
+                enot: {},
+            },
+            components: {
+                create: Create,
+                ready: Ready
+            },
+            methods: {
+                enot_buy: function (age) {
+                    this.enot = enot_buy(age.min, age.max);
+                    this.enot = numToStr(this.enot);
+                    this.current = 'ready';
+                },
+            },
+        })
+    </script>
+</body>
+
+</html>
