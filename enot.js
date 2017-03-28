@@ -55,14 +55,14 @@ function clone(obj) {
 function comres(obj) {
     let res = [];
     if (obj.age !== 0) { res.push(`Ваш енотик празднует день рождения!Не забудьте купить тортик!ведь он стал на ${obj.age} лет старше`); }
-    if (obj.energy !== 0 || obj.energy > 0) { res.push('Это ено энерджайзер!Его энергия растет и увеличивается на ' + obj.energy + ' очков'); }
-    if (obj.energy !== 0 || obj.energy < 0) { res.push('Ваш унылый енот стал еще унылее и потерял ' + obj.energy + ' энергии'); }
-    if (obj.hungry !== 0 || obj.hungry > 0) { res.push('енот проголодался'); }
-    if (obj.hungry !== 0 || obj.hungry < 0) { res.push('енот наелся'); }
-    if (obj.personality !== 0 || obj.personality > 0) { res.push('Енот в силу жизненных обсоятельств долго думал над своим поведением и стал еще более неадекватным'); }
-    if (obj.personality !== 0 || obj.personality < 0) { res.push('Енот в силу жизненных обсоятельств долго думал над своим поведением и стал менее неадекватным'); }
-    if (obj.insult !== 0 || obj.insult > 0) { res.push('твой енот ненавидит тебя еще больше чем раньше.и думае разное о твоей маме!в следующий раз тебе стоит подумать дважды прежде чем связываться с ним'); }
-    if (obj.insult !== 0 || obj.insult < 0) { res.push('Папочка енот доволен своим белым рабом, продолжай в тоже духе и возможно он станет к тебе благосклонен'); }
+    if (obj.energy !== 0 && obj.energy > 0) { res.push('Это ено энерджайзер!Его энергия растет и увеличивается на ' + obj.energy + ' очков'); }
+    if (obj.energy !== 0 && obj.energy < 0) { res.push('Ваш унылый енот стал еще унылее и потерял ' + obj.energy + ' энергии'); }
+    if (obj.hungry !== 0 && obj.hungry > 0) { res.push('енот проголодался'); }
+    if (obj.hungry !== 0 && obj.hungry < 0) { res.push('енот наелся'); }
+    if (obj.personality !== 0 && obj.personality > 0) { res.push('Енот в силу жизненных обсоятельств долго думал над своим поведением и стал еще более неадекватным'); }
+    if (obj.personality !== 0 && obj.personality < 0) { res.push('Енот в силу жизненных обсоятельств долго думал над своим поведением и стал менее неадекватным'); }
+    if (obj.insult !== 0 && obj.insult > 0) { res.push('твой енот ненавидит тебя еще больше чем раньше.и думае разное о твоей маме!в следующий раз тебе стоит подумать дважды прежде чем связываться с ним'); }
+    if (obj.insult !== 0 && obj.insult < 0) { res.push('Папочка енот доволен своим белым рабом, продолжай в тоже духе и возможно он станет к тебе благосклонен'); }
     return res;
 }
 
@@ -197,8 +197,6 @@ module.exports = {
         clone: clone,
         erondondon: erondondon,
         eq: eq,
-        tran: tran,
-        nart: nart,
         val: val
     }
 };

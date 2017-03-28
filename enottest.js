@@ -1,6 +1,4 @@
-let huynot = require('.././week3/enot.js');
-let tran = huynot.private.tran;
-let nart = huynot.private.nart;
+let huynot = require('./enot.js');
 let enot_buy = huynot.enot_buy;
 let enot_play = huynot.enot_play;
 let enot_feed = huynot.enot_feed;
@@ -10,6 +8,7 @@ let clone = huynot.private.clone;
 let eq = huynot.private.eq;
 let interp = huynot.private.interp;
 let erondondon = huynot.private.erondondon;
+let val = huynot.private.val;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -24,11 +23,11 @@ function testo(bool, enot) {
     }
 }
 
-function testtrannart(enot) {
+/*function testtrannart(enot) {
     let obj1 = enot;
     let obj2 = tran(nart(enot));
     testo(eq(obj1, obj2),enot);
-}
+}*/
 
 //console.log(erondondon(1,6));
 let test = (enot_buy(1,7));
@@ -37,9 +36,9 @@ console.log(test);
 let enot = {
     age: 15,
     energy: 76,
-    hungry: true,
-    personality: 'енотус неадекватус',
-    insult: 'обижен'
+    hungry: 1,
+    personality: 2,
+    insult: 2
  };
  let test2 =(enot_feed(test));  
  console.log(test2);
@@ -47,14 +46,14 @@ let enot = {
  
 
 
- function runtest() {
+ /*function runtest() {
     for (let i=0;i<3;i++){
         testtrannart(enot_buy(1,100));
     }
-}
+}*/
 
 
-runtest();
+//runtest();
 console.log('huy');
 function enot_play_test(){
     for (let i=0;i<3;i++){
@@ -72,25 +71,25 @@ function hungry_test(enot) {
 }
 hungry_test({ age: 2,
   energy: 24,
-  hungry: false,
-  personality: 'енотус неадекватус',
-  insult: 'обижен' });
+  hungry: 0,
+  personality: 3,
+  insult: 1 });
 
 
 function compare_test(){
 let enot1 = {
     age: 15,
     energy: 76,
-    hungry: true,
-    personality: 'енотус неадекватус',
-    insult: 'обижен'
+    hungry: 1,
+    personality: 3,
+    insult: 2
  };
 let enot2 = {
     age: 15,
     energy: 71,
-    hungry: true,
-    personality: 'енотус неадекватус',
-    insult: 'ой Фсе!'
+    hungry: 1,
+    personality: 3,
+    insult: 4
  };
     let expected = {
         age: 0,
