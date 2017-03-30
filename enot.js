@@ -15,6 +15,8 @@
  * @property {number} insult 
  * Степень обиженности енота. Может принимать одно из 
  * значений от 0 до 6.
+ * @property {number} cooldown
+ * Время в течении которого енота нельзя кантовать.
  * @property {Number} personality
  * Характер енота. Может принимать одно из значений 0, 1, 2. 
  * 0 означает спокойный характер, 1 - беспокойный характер, 2 - жутко кипешной характер.
@@ -28,7 +30,11 @@
  * }
  */
 
-const enotprops = ['age', 'energy', 'personality', 'insult', 'hungry'];
+let timeenv = require('./time.js');
+let is_daytime = timeenv.is_daytime;
+let is_nighttime = timeenv.is_nighttime;
+
+const enotprops = ['age', 'energy', 'personality', 'insult', 'hungry','cooldown'];
 
 /**
  * Валидация изменяемых параметров енота, чтобы они не могли увеличиваться\уменьшаться бесконечно и всегда
@@ -63,6 +69,8 @@ function comres(obj) {
     if (obj.personality !== 0 && obj.personality < 0) { res.push('Енот в силу жизненных обсоятельств долго думал над своим поведением и стал менее неадекватным'); }
     if (obj.insult !== 0 && obj.insult > 0) { res.push('твой енот ненавидит тебя еще больше чем раньше.и думае разное о твоей маме!в следующий раз тебе стоит подумать дважды прежде чем связываться с ним'); }
     if (obj.insult !== 0 && obj.insult < 0) { res.push('Папочка енот доволен своим белым рабом, продолжай в тоже духе и возможно он станет к тебе благосклонен'); }
+    if (obj.cooldown !==0 && obj.cooldown >0) { res.push('Енот устал и будет недоступен для дальнейшего теребоньканья в течении ' + obj.cooldown + ' времени'); }
+    if (obj.cooldown !==0 && obj.cooldown <0) {res.push ('енотик копит свои силы чтобы стать самураем!'); }
     return res;
 }
 
@@ -95,6 +103,7 @@ function eq(enot, enotdva) {
     if (enot.hungry !== enotdva.hungry) { return false; }
     if (enot.personality !== enotdva.personality) { return false; }
     if (enot.insult !== enotdva.insult) { return false; }
+    if (enot.cooldown !== enotdva.cooldown) {return false; }
     return true;
 }
 
@@ -120,6 +129,7 @@ function enot_buy(min_age, max_age) {
         res.energy = erondondon(1, 100);
         res.hungry = erondondon(0, 2);
         res.personality = erondondon(0, 3);
+        res.cooldown = 0;
         if (res.personality === 0) { res.insult = 0; }
         else { res.insult = erondondon(1, 7); }
     }
@@ -137,6 +147,7 @@ function enot_buy(min_age, max_age) {
  * функция не меняет изначального енота а создает нового.
  */
 function enot_feed(enot) {
+    if (is_nighttime()) {return clone(enot);}
     let res = {};
     let age = enot.age;
     res.age = enot.age;
@@ -152,6 +163,7 @@ function enot_feed(enot) {
         res.insult = enot.insult + 1;
         if (enot.personality === 2) { res.insult++; }
     }
+   res.cooldown = 5; 
     return val(res);
 }
 
@@ -183,6 +195,8 @@ function enot_play(enot) {
     if (erondondon(1, 100) <= 30) { res.hungry = 1; }
     else { res.hungry = res.hungry; }
     res.energy = res.energy - 10;
+    if (is_daytime()) {res.cooldown = 10;}
+    else {res.cooldown = 5;}
     return val(res);
 }
 
