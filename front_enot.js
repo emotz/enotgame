@@ -21,7 +21,7 @@ function strToNum(enot) {
     res.age = enot.age;
     res.energy = enot.energy;
 
-    if (enot.hungry == 'Голоден')
+    if (enot.hungry == 'голоден')
         res.hungry = 1;
     else
         res.hungry = 0;

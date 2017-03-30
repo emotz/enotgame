@@ -59,22 +59,22 @@
             data: function () {
                 return {
                     comres: ['Вы купили енота'],
-                    myEnot: this.enot,
+                    myenot: this.enot,
                     new_enot: {}
                 }
             },
             methods: {
                 enot_feed: function () {
-                    this.myEnot = strToNum(this.myEnot);
-                    this.new_enot = enot_feed(this.myEnot);
-                    this.comres = comres(compare(this.myEnot, this.new_enot));
-                    this.myEnot = numToStr(this.new_enot);
+                    this.myenot = strToNum(this.myenot);
+                    this.new_enot = enot_feed(this.myenot);
+                    this.comres = comres(compare(this.myenot, this.new_enot));
+                    this.myenot = numToStr(this.new_enot);
                 },
                 enot_play: function () {
-                    this.myEnot = strToNum(this.myEnot);
-                    this.new_enot = enot_play(this.myEnot);
-                    this.comres = comres(compare(this.myEnot, this.new_enot));
-                    this.myEnot = numToStr(this.new_enot);
+                    this.myenot = strToNum(this.myenot);
+                    this.new_enot = enot_play(this.myenot);
+                    this.comres = comres(compare(this.myenot, this.new_enot));
+                    this.myenot = numToStr(this.new_enot);
                 },
                 create: function () {
                     this.$emit('create');
@@ -86,7 +86,7 @@
     <script type="text/x-template" id="ready-id">
         <div>
             <div class="enot">
-                <li v-for="(item, index) in myEnot">{{index}} : {{item}}</li>
+                <li v-for="(item, index) in myenot">{{index}} : {{item}}</li>
             </div>
             <div class="enot">
                 <button v-on:click="enot_feed">Feed</button>
@@ -95,11 +95,11 @@
             <div class="enot">
                 <p>Important messages:</p><br>
                 <p>
-                    <span v-if="enot.energy<30">Energy is low!<br></span>
-                    <span v-if="enot.hungry">Enot is hungry!<br></span>
+                    <span v-if="myenot.energy<30">Energy is low!<br></span>
+                    <span v-if="myenot.hungry=='голоден'">Enot is hungry!<br></span>
                 </p>
             </div>
-            <ul>
+            <ul class="comres">
                 <li v-for="str in comres"> {{ str }} </li>
             </ul>
         </div>
