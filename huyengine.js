@@ -17,7 +17,7 @@ let is_nighttime = timeenv.is_nighttime;
 
 
 /**
- * @name jopa
+ * @name world
  * @property environment
  * @property enot
  */
