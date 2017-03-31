@@ -43,20 +43,20 @@ function lunch_buy(environment,min_age, max_age) {
     return enot_buy(min_age, max_age);
 }
 
-function lunch_feed(enot) {
+function lunch_feed(world) {
         let res = {};
-        let newnot = enot_feed(enot);
-        environment.time = environment.time+newnot.cooldown;
+        let newnot = enot_feed(world[enot]);
+        res.time = world.environvent.time+newnot.cooldown;
         newnot.cooldown = 0;
         res.enot = newnot;
         res.environment = environment;
         return res;
 }
 
-function lunch_play(enot, time){
+function lunch_play(world){
     let res = {};
-    let newnot = enot_play(enot);
-    environment.time = environment.time+newnot.cooldown;
+    let newnot = enot_play(world[enot]);
+    res.time = world.environment.time+newnot.cooldown;
     newnot.cooldown = 0;
     res.enot = newnot;
     res.environment = environment;
