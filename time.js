@@ -11,9 +11,7 @@ function is_nighttime(time){
 //////////////////////////////////////////////////////exports//////////////////////////////
 
 module.exports = {
-    private: {
         is_daytime: is_daytime,
         is_nighttime: is_nighttime
-    }
 };
 

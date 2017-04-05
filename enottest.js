@@ -2,6 +2,7 @@ let huynot = require('./enot.js');
 let enot_buy = huynot.enot_buy;
 let enot_play = huynot.enot_play;
 let enot_feed = huynot.enot_feed;
+let enot_wait = huynot.enot_wait;
 let compare = huynot.compare;
 let comres = huynot.comres;
 let clone = huynot.private.clone;
@@ -20,6 +21,7 @@ function testo(bool, enot) {
     else {
         if (enot !== undefined) { console.log(enot); }
         else { console.log('сАсет'); }
+        throw "сасет";
     }
 }
 
@@ -30,7 +32,7 @@ function testo(bool, enot) {
 }*/
 
 //console.log(erondondon(1,6));
-let test = (enot_buy(1,7));
+let test = (enot_buy(1, 7));
 console.log(test);
 //console.log(test);
 let enot = {
@@ -39,58 +41,60 @@ let enot = {
     hungry: 1,
     personality: 2,
     insult: 2
- };
- let test2 =(enot_feed(test));  
- console.log(test2);
- console.log(enot_play(test2));
- 
+};
+let test2 = (enot_feed(test));
+console.log(test2);
+console.log(enot_play(test2));
 
 
- /*function runtest() {
-    for (let i=0;i<3;i++){
-        testtrannart(enot_buy(1,100));
-    }
+
+/*function runtest() {
+   for (let i=0;i<3;i++){
+       testtrannart(enot_buy(1,100));
+   }
 }*/
 
 
 //runtest();
 console.log('huy');
-function enot_play_test(){
-    for (let i=0;i<3;i++){
-        let enot = enot_buy(1,100);
+function enot_play_test() {
+    for (let i = 0; i < 3; i++) {
+        let enot = enot_buy(1, 100);
         let clon = clone(enot);
         enot_play(clon);
-        testo(clon.hungry !== undefined,enot);
+        testo(clon.hungry !== undefined, enot);
     }
 }
-enot_play_test(); 
+enot_play_test();
 
 function hungry_test(enot) {
     let jopa = enot_play(enot_feed(enot));
     testo(jopa.hungry !== undefined);
 }
-hungry_test({ age: 2,
-  energy: 24,
-  hungry: 0,
-  personality: 3,
-  insult: 1 });
+hungry_test({
+    age: 2,
+    energy: 24,
+    hungry: 0,
+    personality: 3,
+    insult: 1
+});
 
 
-function compare_test(){
-let enot1 = {
-    age: 15,
-    energy: 76,
-    hungry: 1,
-    personality: 3,
-    insult: 2
- };
-let enot2 = {
-    age: 15,
-    energy: 71,
-    hungry: 1,
-    personality: 3,
-    insult: 4
- };
+function compare_test() {
+    let enot1 = {
+        age: 15,
+        energy: 76,
+        hungry: 1,
+        personality: 3,
+        insult: 2
+    };
+    let enot2 = {
+        age: 15,
+        energy: 71,
+        hungry: 1,
+        personality: 3,
+        insult: 4
+    };
     let expected = {
         age: 0,
         energy: -5,
@@ -98,10 +102,12 @@ let enot2 = {
         personality: 0,
         insult: 2
     };
-    testo(eq(compare(enot1,enot2),expected));
+    testo(eq(compare(enot1, enot2), expected));
 
 }
-  let pizda1 = enot_buy(2,5);
-  let pizda2 = enot_buy(3,8);
-  console.log(comres(compare(pizda1,pizda2)));
-  compare_test();
+let pizda1 = enot_buy(2, 5);
+let pizda2 = enot_buy(3, 8);
+console.log(comres(compare(pizda1, pizda2)));
+compare_test();
+
+console.log(enot_wait(enot,5));

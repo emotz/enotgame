@@ -34,7 +34,7 @@ let timeenv = require('./time.js');
 let is_daytime = timeenv.is_daytime;
 let is_nighttime = timeenv.is_nighttime;
 
-const enotprops = ['age', 'energy', 'personality', 'insult', 'hungry','cooldown'];
+const enotprops = ['age', 'energy', 'personality', 'insult', 'hungry', 'cooldown'];
 
 /**
  * Валидация изменяемых параметров енота, чтобы они не могли увеличиваться\уменьшаться бесконечно и всегда
@@ -42,11 +42,11 @@ const enotprops = ['age', 'energy', 'personality', 'insult', 'hungry','cooldown'
  * @param {Enot} enot 
  * функция меняет текущего енота.
  */
-function val(enot){
-    if (enot.energy < 0){enot.energy = 0;}
-    if (enot.energy >100){enot.energy = 100;}
-    if (enot.insult > 6){enot.insult = 6;}
-    if (enot.insult < 0){enot.insult = 0;}
+function val(enot) {
+    if (enot.energy < 0) { enot.energy = 0; }
+    if (enot.energy > 100) { enot.energy = 100; }
+    if (enot.insult > 6) { enot.insult = 6; }
+    if (enot.insult < 0) { enot.insult = 0; }
     return enot;
 }
 
@@ -69,8 +69,8 @@ function comres(obj) {
     if (obj.personality !== 0 && obj.personality < 0) { res.push('Енот в силу жизненных обсоятельств долго думал над своим поведением и стал менее неадекватным'); }
     if (obj.insult !== 0 && obj.insult > 0) { res.push('твой енот ненавидит тебя еще больше чем раньше.и думае разное о твоей маме!в следующий раз тебе стоит подумать дважды прежде чем связываться с ним'); }
     if (obj.insult !== 0 && obj.insult < 0) { res.push('Папочка енот доволен своим белым рабом, продолжай в тоже духе и возможно он станет к тебе благосклонен'); }
-    if (obj.cooldown !==0 && obj.cooldown >0) { res.push('Енот устал и будет недоступен для дальнейшего теребоньканья в течении ' + obj.cooldown + ' времени'); }
-    if (obj.cooldown !==0 && obj.cooldown <0) {res.push ('енотик копит свои силы чтобы стать самураем!'); }
+    if (obj.cooldown !== 0 && obj.cooldown > 0) { res.push('Енот устал и будет недоступен для дальнейшего теребоньканья в течении ' + obj.cooldown + ' времени'); }
+    if (obj.cooldown !== 0 && obj.cooldown < 0) { res.push('енотик копит свои силы чтобы стать самураем!'); }
     return res;
 }
 
@@ -103,7 +103,7 @@ function eq(enot, enotdva) {
     if (enot.hungry !== enotdva.hungry) { return false; }
     if (enot.personality !== enotdva.personality) { return false; }
     if (enot.insult !== enotdva.insult) { return false; }
-    if (enot.cooldown !== enotdva.cooldown) {return false; }
+    if (enot.cooldown !== enotdva.cooldown) { return false; }
     return true;
 }
 
@@ -147,7 +147,7 @@ function enot_buy(min_age, max_age) {
  * функция не меняет изначального енота а создает нового.
  */
 function enot_feed(enot) {
-    if (is_nighttime()) {return clone(enot);}
+    if (is_nighttime()) { return clone(enot); }
     let res = {};
     let age = enot.age;
     res.age = enot.age;
@@ -163,7 +163,7 @@ function enot_feed(enot) {
         res.insult = enot.insult + 1;
         if (enot.personality === 2) { res.insult++; }
     }
-   res.cooldown = 5; 
+    res.cooldown = 5;
     return val(res);
 }
 
@@ -195,16 +195,60 @@ function enot_play(enot) {
     if (erondondon(1, 100) <= 30) { res.hungry = 1; }
     else { res.hungry = res.hungry; }
     res.energy = res.energy - 10;
-    if (is_daytime()) {res.cooldown = 10;}
-    else {res.cooldown = 5;}
+    if (is_daytime()) { res.cooldown = 10; }
+    else { res.cooldown = 5; }
     return val(res);
 }
+
+function enot_starving(enot) {
+    let res = clone(enot);
+    res.hungry = 1;
+    return val(res);
+}
+
+function enot_selffeed(enot) {
+    let res = clone(enot);
+    res.hungry = 0;
+    res.energy = res.energy + 10;
+    return val(res);
+}
+function enot_wash(enot) {
+    let res = clone(enot);
+    res.insult--;
+    res.hungry = 1;
+    return val(res);
+}
+
+
+function enot_wait(enot, timetowait) {
+    let tmp = clone(enot);
+    let res = [];
+    let count = 0;
+    for (let i = 0; i < timetowait; i++) {
+        let rnjesus = erondondon(1, 100);
+        if (rnjesus <= 15) {
+            tmp = enot_starving(tmp);
+            res.push({ event: 'енот увидел как жрешь и теперь тоже голоден', enot_changed: tmp });
+        } else if (rnjesus > 15 && rnjesus <= 50) {
+            tmp = enot_wash(tmp);
+            res.push({ event: 'енот нашел где ты прячешь свой телефон, помыл его и стал немного довольнее', enot_changed: tmp });
+        } else if (rnjesus > 50 && rnjesus <= 90) {
+            tmp = enot_selffeed(tmp);
+            res.push({ event: 'енот нашел под кроватью пропавшую ранее печеньку и ликвидировал ее', enot_changed: tmp });
+        } else { /* это не ошибка, это просто специально сделаная пустая хреновина, которая абсолютно нихрена не делает, и меня заставил ее написать димас*/
+        }
+    }
+    return res;
+}
+
+
 
 ////////////////////////////////////////////////////////////////////////////exports///////////////////////////////////////////////////////////////////////////////////
 module.exports = {
     enot_buy: enot_buy,
     enot_play: enot_play,
     enot_feed: enot_feed,
+    enot_wait: enot_wait,
     compare: compare,
     comres: comres,
     private: {
