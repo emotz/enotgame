@@ -30,9 +30,14 @@
  * }
  */
 
+let enotevents = require('./enotevents.js');
 let timeenv = require('./time.js');
 let is_daytime = timeenv.is_daytime;
 let is_nighttime = timeenv.is_nighttime;
+let utility = require('./huyutility.js');
+let val = utility.val;
+let clone = utility.clone;
+let erondondon = utility.erondondon;
 
 const enotprops = ['age', 'energy', 'personality', 'insult', 'hungry', 'cooldown'];
 
@@ -42,17 +47,7 @@ const enotprops = ['age', 'energy', 'personality', 'insult', 'hungry', 'cooldown
  * @param {Enot} enot 
  * функция меняет текущего енота.
  */
-function val(enot) {
-    if (enot.energy < 0) { enot.energy = 0; }
-    if (enot.energy > 100) { enot.energy = 100; }
-    if (enot.insult > 6) { enot.insult = 6; }
-    if (enot.insult < 0) { enot.insult = 0; }
-    return enot;
-}
 
-function clone(obj) {
-    return JSON.parse(JSON.stringify(obj));
-}
 /**
  * Переводит результат сравнения двух енотов в текстовые значения, но это не точно.
  * @param {ComparEnot} obj
@@ -74,9 +69,6 @@ function comres(obj) {
     return res;
 }
 
-function erondondon(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
-}
 
 /**
  * Вычисляет изменения двух енотов.
@@ -200,42 +192,15 @@ function enot_play(enot) {
     return val(res);
 }
 
-function enot_starving(enot) {
-    let res = clone(enot);
-    res.hungry = 1;
-    return val(res);
-}
-
-function enot_selffeed(enot) {
-    let res = clone(enot);
-    res.hungry = 0;
-    res.energy = res.energy + 10;
-    return val(res);
-}
-function enot_wash(enot) {
-    let res = clone(enot);
-    res.insult--;
-    res.hungry = 1;
-    return val(res);
-}
-
 
 function enot_wait(enot, timetowait) {
-    let tmp = clone(enot);
     let res = [];
-    let count = 0;
+    let tmp = enot;
     for (let i = 0; i < timetowait; i++) {
-        let rnjesus = erondondon(1, 100);
-        if (rnjesus <= 15) {
-            tmp = enot_starving(tmp);
-            res.push({ event: 'енот увидел как жрешь и теперь тоже голоден', enot_changed: tmp });
-        } else if (rnjesus > 15 && rnjesus <= 50) {
-            tmp = enot_wash(tmp);
-            res.push({ event: 'енот нашел где ты прячешь свой телефон, помыл его и стал немного довольнее', enot_changed: tmp });
-        } else if (rnjesus > 50 && rnjesus <= 90) {
-            tmp = enot_selffeed(tmp);
-            res.push({ event: 'енот нашел под кроватью пропавшую ранее печеньку и ликвидировал ее', enot_changed: tmp });
-        } else { /* это не ошибка, это просто специально сделаная пустая хреновина, которая абсолютно нихрена не делает, и меня заставил ее написать димас*/
+        if (erondondon(1, 100) < 30) {
+            newevent = enotevents.choosevent();
+            tmp = newevent.action(tmp);
+            res.push({ event: newevent.description, resultenot: tmp });
         }
     }
     return res;

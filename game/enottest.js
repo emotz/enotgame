@@ -5,11 +5,13 @@ let enot_feed = huynot.enot_feed;
 let enot_wait = huynot.enot_wait;
 let compare = huynot.compare;
 let comres = huynot.comres;
-let clone = huynot.private.clone;
 let eq = huynot.private.eq;
 let interp = huynot.private.interp;
-let erondondon = huynot.private.erondondon;
-let val = huynot.private.val;
+
+let utility = require('./huyutility.js');
+let val = utility.val;
+let clone = utility.clone;
+let erondondon = utility.erondondon;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
