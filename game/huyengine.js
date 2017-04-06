@@ -62,3 +62,13 @@ function lunch_play(world){
     res.enot = newnot;
     return res;
 }
+
+function lunch_wait(world,timetowait){
+    let res = {};
+    res.environment = clone(world.environment);
+    let newnot = enot_wait(world,timetowait);
+    res.environment.time = world.environment.time + timetowait;
+    let i = newnot.length;
+    res.enot = newnot[i-1].resultenot;
+    return res;
+}
