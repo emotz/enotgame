@@ -28,7 +28,12 @@ let enotevents = {
     }
 };
 
-
+/**
+ * Функция запуска события fight из обьекта enotevents.
+ * По итогу выполнения функции енот проголодается, и потеряет 30 энергии, но зато наваляет тохиной сестре.
+ * Вероятность происходения события 100.
+ * @param {enot} enot 
+ */
 function fight(enot) {
     let res = clone(enot);
     res.hungry = 1;
@@ -36,20 +41,36 @@ function fight(enot) {
     return val(res);
 }
 
-
+/**
+ * функция запуска события starving из enotevents.
+ * По итогу выполнения функции енот станет голодным.
+ * вероятность происхождения 15
+ * @param {enot} enot 
+ */
 function starving(enot) {
     let res = clone(enot);
     res.hungry = 1;
     return val(res);
 }
 
+/**
+ * Функция запуска события selffeed из enotevents.
+ * По итогу выполнения функции енот станет НЕголоден, и получит +10 к энергии.
+ * Веоятность происхождения события 50
+ * @param {enot} enot 
+ */
 function selffeed(enot) {
     let res = clone(enot);
     res.hungry = 0;
     res.energy = res.energy + 10;
     return val(res);
 }
-
+/**
+ * Функция запуска события wash из enotevents.
+ * По итогу выолнения функции енот станет голоден, и его настроение улучшится на одно значение.
+ * Вероятность происхождения события 20.
+ * @param {enot} enot 
+ */
 function wash(enot) {
     let res = clone(enot);
     res.insult--;
@@ -57,7 +78,11 @@ function wash(enot) {
     return val(res);
 }
 
-
+/**
+ * Функция выбора события.
+ * Работает по прнципу выбрасывания рандомного числа в диапазоне, где минимальное значение 1,А максимальное это общая сумма всех 
+ * параметров prob_weight из обьекста enotevents.
+ */
 function choosevent() {
     let totalprob = 0;
     for (let event in enotevents) {
@@ -70,11 +95,11 @@ function choosevent() {
         }
         else rnjesus = rnjesus - enotevents[event].prob_weight;
     }
-    return event;
+    throw new Error ('всегда должен быть ивент');
 }
 
 
-//////////////////////////////////////////////////////////////////////////////exports//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////exports///////////////////////////////////////////////////////////////
 module.exports = {
     choosevent : choosevent
 };

@@ -88,7 +88,11 @@ function compare(enot, enotnew) {
     }
     return res;
 }
-
+/**
+ * Сравнение двух енотов, в случае несоответсвия хотябы одного параметра у двух переданых енотов,функция возвращает фалсе.
+ * @param {enot} enot Сравниваемый енот номер разное
+ * @param {*} enotdva сравниваемый енот номер дваз
+ */
 function eq(enot, enotdva) {
     if (enot.age !== enotdva.age) { return false; }
     if (enot.energy !== enotdva.energy) { return false; }
@@ -192,7 +196,17 @@ function enot_play(enot) {
     return val(res);
 }
 
-
+/**
+ * Енот в режиме ожидания.
+ * В течении выбранного пользователем времени timetowait 
+ * енот находится в режиме ожидания, и каждую минуту с ним может произойти рандомное событие
+ * события описняны в модуле enotevents.js.
+ * вероятность происхождения события указана в разделе enotevents.
+ * Результатом является массив с обьектами, в каждом обьекте первое значение-описание
+ * Функция создает нового енота а не изменяет старого.
+ * @param {Enot} enot 
+ * @param {integer} timetowait 
+ */
 function enot_wait(enot, timetowait) {
     let res = [];
     let tmp = enot;
