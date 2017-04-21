@@ -1,7 +1,7 @@
 {
     "files.exclude": {
-        "out":true,
-        "node_modules": true,
+        "**/out": true,
+        "**/node_modules": true,
         "package.json": true
     }
 }

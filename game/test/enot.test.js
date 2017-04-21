@@ -1,19 +1,19 @@
-let huynot = require('../enot.js');
+let huynot = require('../lib/enot.js');
 let enot_buy = huynot.enot_buy;
 let enot_play = huynot.enot_play;
 let enot_feed = huynot.enot_feed;
 let compare = huynot.compare;
 let comres = huynot.comres;
-let clone = huynot.private.clone;
 let eq = huynot.private.eq;
-let interp = huynot.private.interp;
-let erondondon = huynot.private.erondondon;
-let val = huynot.private.val;
+
+let huyutility = require('../lib/huyutility.js');
+let clone = huyutility.clone;
+let erondondon = huyutility.erondondon;
+let val = huyutility.val;
+
 let testhelper = require('./testhelper.js');
 let testo = testhelper.testo;
 //////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
 it("testenotplay", function () {
     for (let i = 0; i < 3; i++) {
@@ -23,8 +23,6 @@ it("testenotplay", function () {
         testo(clon.hungry !== undefined, enot);
     }
 });
-
-
 
 it("testenothungry", function () {
     let hungryenot = {

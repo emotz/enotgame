@@ -1,6 +1,10 @@
 /**
- * Функция проверки времени на предмет времени суток с 0 до 12 считается днем.
- * @param {Integer} time
+ * @module time
+ */
+
+/**
+ * Проверяет время на предмет времени суток, с 0 до 12 считается днем.
+ * @param {Number} time Число минут
  * @returns {Boolean} 
  */
 function is_daytime(time) {
@@ -9,8 +13,8 @@ function is_daytime(time) {
 }
 
 /**
- * Функция проверки времени на предмет времени суток с 12 до 24 считается ночью.
- * @param {Integer} time 
+ * Проверяет время на предмет времени суток, с 12 до 24 считается ночью.
+ * @param {Number} time Число минут
  * @returns {Boolean}
  */
 function is_nighttime(time) {
@@ -18,11 +22,9 @@ function is_nighttime(time) {
     else { return false; }
 }
 
-
-//////////////////////////////////////////////////////exports//////////////////////////////
+/////////////////////////exports//////////////////////////////
 
 module.exports = {
     is_daytime: is_daytime,
     is_nighttime: is_nighttime
 };
-

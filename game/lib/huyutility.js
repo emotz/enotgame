@@ -1,7 +1,12 @@
 /**
+ * @module huyutility
+ */
+
+/**
  * Валидация енота, проверяет определенные параметры енота на предмет превышения значений
  * И выхода их за пределы описаных нами возможностей енота.
  * @param {Enot} enot 
+ * @returns {Enot}
  */
 function val(enot) {
     if (enot.energy < 0) { enot.energy = 0; }
@@ -11,8 +16,9 @@ function val(enot) {
     return enot;
 }
 /**
- * Функция клонирования обьекта
+ * Функция клонирования объекта
  * @param {Object} obj 
+ * @returns {Object}
  */
 function clone(obj) {
     return JSON.parse(JSON.stringify(obj));
@@ -20,14 +26,16 @@ function clone(obj) {
 
 /**
  * Генерация случайного числа в указаном диапазоне
- * @param {Integer} min Минимальное значение
- * @param {Integer} max Максимальное значение
- * @returns {Integer}
+ * @param {Number} min Минимальное значение (включительно)
+ * @param {Number} max Максимальное значение (не включительно)
+ * @returns {Number}
  */
 function erondondon(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
-/////////////////////exports////////////////////////////
+
+/////////////////////////exports//////////////////////////////
+
 module.exports = {
     val: val,
     clone: clone,
