@@ -1,0 +1,8 @@
+{
+  "name": "enotgame-frontend",
+  "version": "0.1.0a",
+  "main": "lib/huyengine.js",
+  "directories": {
+    "lib": "lib"
+  }
+}
