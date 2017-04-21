@@ -19,14 +19,14 @@ let is_nighttime = timeenv.is_nighttime;
 
 
 /**
- * @name world
- * @property environment
- * @property enot
+ * @typedef {Object} World
+ * @property {Environment} environment
+ * @property {Enot} enot
  */
 
 
 /**
- * @name environment
+ * @typedef {Object} Environment
  * @property {Number} time
  * Время нашей енотовой планеты, оно неизменно мы над ним невластны.мы ваще все дно.
  * кто мы?зачем мыздесь?какова цель нашего бесполезного существования, ладно пойду бухну.
@@ -34,6 +34,12 @@ let is_nighttime = timeenv.is_nighttime;
  * let environment = {
  * time = 13
  * }
+ */
+
+
+/**
+ * Функция инициализации мира, установление времени на 0 значение.
+ * @returns {Environment}
  */
 function init() {
     let environment = {};
@@ -44,51 +50,55 @@ function init() {
 
 /**
  * Запуск функции enot_buy.
- * @param {object} environment Обьект содержащий информацию о текущем окружении енота(таком как время и так далее) 
- * @param {integer} min_age Минимальный возраст енота(должен быть указан пользователем, поидее)
- * @param {integer} max_age Максимальный возрас енота (должен быть указан юзверем...нно это не точно)
+ * @param {Environment} environment Обьект содержащий информацию о текущем окружении енота(таком как время и так далее) 
+ * @param {Number} min_age Минимальный возраст енота(должен быть указан пользователем, поидее)
+ * @param {Number} max_age Максимальный возрас енота не включительно (должен быть указан юзверем...нно это не точно)
+ * @returns {World}
  */
-function lunch_buy(environment,min_age, max_age) {
+function lunch_buy(environment, min_age, max_age) {
     return enot_buy(min_age, max_age);
 }
 /**
  * Запуск функции enot_feed.
- * @param {object} world Обьект содержащий два встроеных обьекста, с информацие об окружении енота, и самом еноте с которым мы взаимодействуем.
+ * @param {World} world Обьект содержащий два встроеных обьекста, с информацие об окружении енота, и самом еноте с которым мы взаимодействуем.
+ * @returns {World}
  */
 function lunch_feed(world) {
-        let res = {};
-        res.environment = clone(world.environment);
-        let newnot = enot_feed(world.enot);
-        res.environment.time = world.environment.time+newnot.cooldown;
-        newnot.cooldown = 0;
-        res.enot = newnot;
-        return res;
+    let res = {};
+    res.environment = clone(world.environment);
+    let newnot = enot_feed(world.enot);
+    res.environment.time = world.environment.time + newnot.cooldown;
+    newnot.cooldown = 0;
+    res.enot = newnot;
+    return res;
 }
 /**
  * Запуск функции enot_play.
- * @param {object} world 
+ * @param {World} world 
+ * @returns {World}
  */
-function lunch_play(world){
+function lunch_play(world) {
     let res = {};
     res.environment = clone(world.environment);
     let newnot = enot_play(world.enot);
-    res.environment.time = world.environment.time+newnot.cooldown;
+    res.environment.time = world.environment.time + newnot.cooldown;
     newnot.cooldown = 0;
     res.enot = newnot;
     return res;
 }
 /**
  * запуск функции enot_wait
- * @param {object} world 
- * @param {integer} timetowait время ожидания, в течении которого с енотом могут проиходить всякие ништяки, должно указываться ппользователем. 
+ * @param {World} world 
+ * @param {Integer} timetowait время ожидания, в течении которого с енотом могут проиходить всякие ништяки, должно указываться ппользователем. 
+ * @returns {World}
  */
-function lunch_wait(world,timetowait){
+function lunch_wait(world, timetowait) {
     let res = {};
     res.environment = clone(world.environment);
-    let newnot = enot_wait(world,timetowait);
+    let newnot = enot_wait(world, timetowait);
     res.environment.time = world.environment.time + timetowait;
     let i = newnot.length;
-    res.enot = newnot[i-1].resultenot;
+    res.enot = newnot[i - 1].resultEnot;
     return res;
 }
 

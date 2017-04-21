@@ -3,7 +3,12 @@ let val = utility.val;
 let clone = utility.clone;
 let erondondon = utility.erondondon;
 
-
+/**
+ * @typedef {Object} EnotEvent
+ * @property {String} description
+ * @property {function(Enot): Enot} action
+ * @property {Number} prob_weight
+ */
 
 let enotevents = {
     wash: {
@@ -31,8 +36,9 @@ let enotevents = {
 /**
  * Функция запуска события fight из обьекта enotevents.
  * По итогу выполнения функции енот проголодается, и потеряет 30 энергии, но зато наваляет тохиной сестре.
- * Вероятность происходения события 100.
- * @param {enot} enot 
+ * Вес вероятности происходения события.
+ * @param {Enot} enot 
+ * @returns {Enot}
  */
 function fight(enot) {
     let res = clone(enot);
@@ -44,8 +50,9 @@ function fight(enot) {
 /**
  * функция запуска события starving из enotevents.
  * По итогу выполнения функции енот станет голодным.
- * вероятность происхождения 15
- * @param {enot} enot 
+ * Вес вероятности происхождения события.
+ * @param {Enot} enot 
+ * @returns {Enot}
  */
 function starving(enot) {
     let res = clone(enot);
@@ -56,8 +63,9 @@ function starving(enot) {
 /**
  * Функция запуска события selffeed из enotevents.
  * По итогу выполнения функции енот станет НЕголоден, и получит +10 к энергии.
- * Веоятность происхождения события 50
- * @param {enot} enot 
+ * Вес вероятности происхождения события.
+ * @param {Enot} enot 
+ * @returns {Enot}
  */
 function selffeed(enot) {
     let res = clone(enot);
@@ -68,8 +76,9 @@ function selffeed(enot) {
 /**
  * Функция запуска события wash из enotevents.
  * По итогу выолнения функции енот станет голоден, и его настроение улучшится на одно значение.
- * Вероятность происхождения события 20.
- * @param {enot} enot 
+ * Вес вероятности происхождения события.
+ * @param {Enot} enot 
+ * @returns {Enot}
  */
 function wash(enot) {
     let res = clone(enot);
@@ -80,8 +89,10 @@ function wash(enot) {
 
 /**
  * Функция выбора события.
- * Работает по прнципу выбрасывания рандомного числа в диапазоне, где минимальное значение 1,А максимальное это общая сумма всех 
- * параметров prob_weight из обьекста enotevents.
+ * Работает по принципу выбрасывания рандомного числа в диапазоне, где минимальное значение 1,А максимальное это общая сумма всех 
+ * параметров prob_weight из обьекта enotevents.
+ * @returns {EnotEvent} 
+ * @throws {Error} Вообщето эта ошибка не должна никогда выпадать, но ДИМАС мэйд ми ду ит.
  */
 function choosevent() {
     let totalprob = 0;
@@ -95,11 +106,11 @@ function choosevent() {
         }
         else rnjesus = rnjesus - enotevents[event].prob_weight;
     }
-    throw new Error ('всегда должен быть ивент');
+    throw new Error('всегда должен быть ивент');
 }
 
 
 //////////////////////////////////////////////////////////////////////////////exports///////////////////////////////////////////////////////////////
 module.exports = {
-    choosevent : choosevent
+    choosevent: choosevent
 };

@@ -1,7 +1,7 @@
 /**
  * Валидация енота, проверяет определенные параметры енота на предмет превышения значений
  * И выхода их за пределы описаных нами возможностей енота.
- * @param {enot} enot 
+ * @param {Enot} enot 
  */
 function val(enot) {
     if (enot.energy < 0) { enot.energy = 0; }
@@ -12,7 +12,7 @@ function val(enot) {
 }
 /**
  * Функция клонирования обьекта
- * @param {obj} obj 
+ * @param {Object} obj 
  */
 function clone(obj) {
     return JSON.parse(JSON.stringify(obj));
@@ -20,8 +20,9 @@ function clone(obj) {
 
 /**
  * Генерация случайного числа в указаном диапазоне
- * @param {intger} min Минимальное значение
- * @param {integer} max Максимальное значение
+ * @param {Integer} min Минимальное значение
+ * @param {Integer} max Максимальное значение
+ * @returns {Integer}
  */
 function erondondon(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;

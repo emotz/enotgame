@@ -5,17 +5,17 @@
  */
 
 /**
- * @name Enot
+ * @typedef Enot
  * @property {Number} age          
  * Возраст енота (в годах)
  * @property {Number} energy       
  * Энергия енота (может меняться от 0 до 100 включительно)
- * @property {number} hungry      
+ * @property {Number} hungry      
  * Голоден ли енот (0 если голоден, 1 если нет, но это не точно)
- * @property {number} insult 
+ * @property {Number} insult 
  * Степень обиженности енота. Может принимать одно из 
  * значений от 0 до 6.
- * @property {number} cooldown
+ * @property {Number} cooldown
  * Время в течении которого енота нельзя кантовать.
  * @property {Number} personality
  * Характер енота. Может принимать одно из значений 0, 1, 2. 
@@ -41,17 +41,12 @@ let erondondon = utility.erondondon;
 
 const enotprops = ['age', 'energy', 'personality', 'insult', 'hungry', 'cooldown'];
 
-/**
- * Валидация изменяемых параметров енота, чтобы они не могли увеличиваться\уменьшаться бесконечно и всегда
- * были в рамках заданых значений.
- * @param {Enot} enot 
- * функция меняет текущего енота.
- */
+
 
 /**
  * Переводит результат сравнения двух енотов в текстовые значения, но это не точно.
  * @param {ComparEnot} obj
- * @returns {string[]} список изменений енотов в виде текста.
+ * @returns {String[]} список изменений енотов в виде текста.
  */
 function comres(obj) {
     let res = [];
@@ -69,6 +64,17 @@ function comres(obj) {
     return res;
 }
 
+
+
+/**
+ * @typedef ComparEnot
+ * @property {Number} age          
+ * @property {Number} energy       
+ * @property {Number} hungry      
+ * @property {Number} insult 
+ * @property {Number} cooldown
+ * @property {Number} personality
+ */
 
 /**
  * Вычисляет изменения двух енотов.
@@ -90,8 +96,9 @@ function compare(enot, enotnew) {
 }
 /**
  * Сравнение двух енотов, в случае несоответсвия хотябы одного параметра у двух переданых енотов,функция возвращает фалсе.
- * @param {enot} enot Сравниваемый енот номер разное
- * @param {*} enotdva сравниваемый енот номер дваз
+ * @param {Enot} enot Сравниваемый енот номер разное
+ * @param {Enot} enotdva сравниваемый енот номер дваз
+ * @returns {Boolean}
  */
 function eq(enot, enotdva) {
     if (enot.age !== enotdva.age) { return false; }
@@ -119,7 +126,7 @@ function eq(enot, enotdva) {
  */
 function enot_buy(min_age, max_age) {
     let res = {};
-    if (min_age < 1 || min_age > max_age) { res = "huy"; }
+    if (min_age < 1 || min_age > max_age) { res = "Еггог"; }
     else {
         res.age = erondondon(min_age, max_age);
         res.energy = erondondon(1, 100);
@@ -140,7 +147,7 @@ function enot_buy(min_age, max_age) {
  * енотов с personality 2 - на 2.
  * В случае успешного кормления (т.е. если енот был голоден) его энергия увеличивается на 20.
  * @param {Enot} enot 
- * функция не меняет изначального енота а создает нового.
+ * @returns {Enot} Функция не меняет изначального енота а создает нового.
  */
 function enot_feed(enot) {
     if (is_nighttime()) { return clone(enot); }
@@ -200,21 +207,21 @@ function enot_play(enot) {
  * Енот в режиме ожидания.
  * В течении выбранного пользователем времени timetowait 
  * енот находится в режиме ожидания, и каждую минуту с ним может произойти рандомное событие
- * события описняны в модуле enotevents.js.
+ * события описаны в модуле enotevents.js.
  * вероятность происхождения события указана в разделе enotevents.
  * Результатом является массив с обьектами, в каждом обьекте первое значение-описание
- * Функция создает нового енота а не изменяет старого.
+ * @return {Enot} Функция создает нового енота а не изменяет старого.
  * @param {Enot} enot 
- * @param {integer} timetowait 
+ * @param {Number} timetowait 
  */
 function enot_wait(enot, timetowait) {
     let res = [];
     let tmp = enot;
     for (let i = 0; i < timetowait; i++) {
         if (erondondon(1, 100) < 30) {
-            newevent = enotevents.choosevent();
+            let newevent = enotevents.choosevent();
             tmp = newevent.action(tmp);
-            res.push({ event: newevent.description, resultenot: tmp });
+            res.push({ event: newevent.description, resultEnot: tmp });
         }
     }
     return res;
