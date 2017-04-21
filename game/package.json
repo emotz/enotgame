@@ -1,16 +1,14 @@
 {
-  "name": "game",
-  "version": "1.0.0",
-  "description": "",
-  "main": "enot.js",
+  "name": "enotgame-game",
+  "version": "0.1.0a",
+  "main": "lib/huyengine.js",
   "directories": {
-    "test": "test"
+    "test": "test",
+    "lib": "lib"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "mocha": "^3.2.0"
   }
