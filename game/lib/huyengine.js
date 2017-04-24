@@ -39,23 +39,29 @@ let is_nighttime = timeenv.is_nighttime;
 
 /**
  * Инициализирует мир, устанавливает время на 0 значение.
- * @returns {Environment}
+ * @returns {World}
  */
 function init() {
-    let environment = {};
-    environment.time = 0;
-    return environment;
+    return {
+        enot: undefined,
+        environment: {
+            time: 0
+        }
+    };
 }
 
 /**
  * Запускает функцию {@link module:enot~enot_buy}.
- * @param {Environment} environment Объект, содержащий информацию о текущем окружении енота (таком как время).
+ * @param {World} world
  * @param {Number} min_age Минимальный возраст енота (должен быть указан пользователем, по идее)
  * @param {Number} max_age Максимальный возрас енота не включительно (должен быть указан юзверем...нно это не точно)
  * @returns {World}
  */
-function lunch_buy(environment, min_age, max_age) {
-    return enot_buy(min_age, max_age);
+function lunch_buy(world, min_age, max_age) {
+    return {
+        enot: enot_buy(min_age, max_age),
+        enrivonment: clone(world.environment)
+    };
 }
 
 /**
