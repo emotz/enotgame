@@ -121,5 +121,7 @@ module.exports = {
     lunch_feed: lunch_feed,
     lunch_play: lunch_play,
     lunch_wait: lunch_wait,
-    init: init
+    init: init,
+    compare,
+    comres
 };

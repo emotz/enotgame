@@ -583,7 +583,7 @@ function init() {
 function lunch_buy(world, min_age, max_age) {
     return {
         enot: enot_buy(min_age, max_age),
-        enrivonment: clone(world.environment)
+        environment: clone(world.environment)
     };
 }
 
@@ -644,7 +644,9 @@ module.exports = {
     lunch_feed: lunch_feed,
     lunch_play: lunch_play,
     lunch_wait: lunch_wait,
-    init: init
+    init: init,
+    compare,
+    comres
 };
 
 

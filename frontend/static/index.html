@@ -4,16 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Enots</title>
-    <script src="vue.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <script src="/lib/vue.js"></script>
+    <script src="/lib/bundle.js"></script>
+    <script src="/lib/front_enot.js"></script>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
-<script src="enot.js"></script>
-<script src="front_enot.js"></script>
 
 <body>
     <div id="enot">
         <create v-if="current=='create'" v-on:enot-buy="enot_buy"></create>
-        <ready v-else-if="current=='ready'" v-bind:enot="enot" v-on:create="current='create'"></ready>
+        <ready v-else-if="current=='ready'" v-bind:enot="world" v-on:create="current='create'"></ready>
     </div>
 
     <script>
@@ -59,22 +59,24 @@
             data: function () {
                 return {
                     comres: ['Вы купили енота'],
-                    myenot: this.enot,
-                    new_enot: {}
+                    world: this.enot,
+                    new_world: {}
                 }
             },
             methods: {
                 enot_feed: function () {
-                    this.myenot = strToNum(this.myenot);
-                    this.new_enot = enot_feed(this.myenot);
-                    this.comres = comres(compare(this.myenot, this.new_enot));
-                    this.myenot = numToStr(this.new_enot);
+                    this.world.enot = strToNum(this.world.enot);
+                    this.new_world = engine.lunch_feed(this.world);
+                    this.comres = engine.comres(engine.compare(this.world.enot, this.new_world.enot));
+                    this.world.enot = numToStr(this.new_world.enot);
+                    this.world.environment = this.new_world.environment;
                 },
                 enot_play: function () {
-                    this.myenot = strToNum(this.myenot);
-                    this.new_enot = enot_play(this.myenot);
-                    this.comres = comres(compare(this.myenot, this.new_enot));
-                    this.myenot = numToStr(this.new_enot);
+                    this.world.enot = strToNum(this.world.enot);
+                    this.new_world = engine.lunch_play(this.world);
+                    this.comres = engine.comres(engine.compare(this.world.enot, this.new_world.enot));
+                    this.world.enot = numToStr(this.new_world.enot);
+                    this.world.environment = this.new_world.environment;
                 },
                 create: function () {
                     this.$emit('create');
@@ -84,19 +86,20 @@
         }
     </script>
     <script type="text/x-template" id="ready-id">
-        <div>
+        <div v-bind:class="{'night':(world.environment.time%24 >=12)}">
             <div class="enot">
-                <li v-for="(item, index) in myenot">{{index}} : {{item}}</li>
+                <li v-for="(item, index) in world.enot">{{index}} : {{item}}</li>
             </div>
-            <div class="enot">
+            <div class="enot but">
                 <button v-on:click="enot_feed">Feed</button>
                 <button v-on:click="enot_play">Play</button>
+                <h2>Time : {{ world.environment.time }}</h2>
             </div>
             <div class="enot">
                 <p>Important messages:</p><br>
                 <p>
-                    <span v-if="myenot.energy<30">Energy is low!<br></span>
-                    <span v-if="myenot.hungry=='голоден'">Enot is hungry!<br></span>
+                    <span v-if="world.enot.energy<30">Energy is low!<br></span>
+                    <span v-if="world.enot.hungry=='голоден'">Enot is hungry!<br></span>
                 </p>
             </div>
             <ul class="comres">
@@ -110,7 +113,7 @@
             el: "#enot",
             data: {
                 current: 'create',
-                enot: {},
+                world: {}
             },
             components: {
                 create: Create,
@@ -118,8 +121,9 @@
             },
             methods: {
                 enot_buy: function (age) {
-                    this.enot = enot_buy(age.min, age.max);
-                    this.enot = numToStr(this.enot);
+                    this.world = engine.init();
+                    this.world = engine.lunch_buy(this.world,age.min, age.max);
+                    this.world.enot = numToStr(this.world.enot);
                     this.current = 'ready';
                 },
             },

@@ -1,12 +1,13 @@
-var insult = ['енот в коме' ,'необижен', 'обижен', 'очень обижен', 'ОБИДАЕБАНАЯ', '"ой, всё!"', 'БОМБИТ!!11!!!'];
+var insult = ['енот в коме', 'необижен', 'обижен', 'очень обижен', 'ОБИДАЕБАНАЯ', '"ой, всё!"', 'БОМБИТ!!11!!!'];
 var personality = ['спокойный характер', 'беспокойный характер', 'жутко кипешной характер'];
 
 function numToStr(enot) {
     var res = {};
     res.age = enot.age;
     res.energy = enot.energy;
+    res.cooldown = enot.cooldown;
 
-    if (enot.hungry == 1)
+    if (enot.hungry == 0)
         res.hungry = 'голоден';
     else
         res.hungry = 'не голоден';
@@ -22,9 +23,9 @@ function strToNum(enot) {
     res.energy = enot.energy;
 
     if (enot.hungry == 'голоден')
-        res.hungry = 1;
-    else
         res.hungry = 0;
+    else
+        res.hungry = 1;
 
     res.personality = personality.indexOf(enot.personality);
     res.insult = insult.indexOf(enot.insult);
