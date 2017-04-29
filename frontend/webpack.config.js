@@ -1,7 +1,16 @@
 module.exports = {
-    entry: '../../game/lib/huyengine.js',
+    entry: './lib/main.js',
     output: {
-        filename: 'bundle.js',
+        filename: './dist/bundle.js',
         library: 'engine'
+    },
+    module: {
+        loaders: [
+            {
+                test: /\.vue$/,
+                exclude: /node_modules/,
+                loader: 'vue-loader'
+            },
+        ]
     }    
 }
