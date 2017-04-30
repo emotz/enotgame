@@ -1,4 +1,5 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const path = require('path');
 module.exports = {
     entry: './lib/main.js',
     output: {
@@ -13,6 +14,11 @@ module.exports = {
                 loader: 'vue-loader'
             },
         ]
+    },
+    resolve: {
+        alias: {
+            game: path.resolve(__dirname,'../game/lib/'),
+}
     },
     plugins: [
         new CopyWebpackPlugin([
