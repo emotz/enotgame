@@ -2,6 +2,7 @@
 Simple game written as part of learning and practicing javascript/vuejs.
 
 ## Frontend setup
+This is one of the modules of the `enotgame` and requires its installation
 
 Switch into `frontend` directory
 
@@ -15,13 +16,9 @@ and initialize `frontend` module
 npm install
 ```
 
-### Build
+### Build & Run
 ```bat
 npm run build
-```
-
-### Start server
-```bat
 npm run watch
 ```
 then open `http://localhost:8000` in your browser and start the game
