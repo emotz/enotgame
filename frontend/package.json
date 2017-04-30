@@ -7,6 +7,7 @@
     "static": "static"
   },
   "devDependencies": {
+    "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.0",
     "vue-loader": "^12.0.2",
     "vue-template-compiler": "^2.3.0",

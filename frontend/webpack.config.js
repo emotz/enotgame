@@ -1,3 +1,4 @@
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = {
     entry: './lib/main.js',
     output: {
@@ -12,5 +13,10 @@ module.exports = {
                 loader: 'vue-loader'
             },
         ]
-    }    
+    },
+    plugins: [
+        new CopyWebpackPlugin([
+            { from: './static', to: './dist' }
+        ])
+    ]
 }
