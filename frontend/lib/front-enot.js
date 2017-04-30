@@ -32,3 +32,8 @@ function strToNum(enot) {
 
     return res;
 }
+
+module.exports = {
+    strToNum,
+    numToStr
+}

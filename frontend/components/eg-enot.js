@@ -7,15 +7,15 @@ export default {
             world: {}
         }
     },
-    components: { 
-        'eg-create': eg_create, 
-        'eg-ready': eg_ready, 
+    components: {
+        'eg-create': eg_create,
+        'eg-ready': eg_ready,
     },
     methods: {
         enot_buy: function (age) {
-            this.world = init();
+            this.world = engine.init();
             this.world = engine.lunch_buy(this.world, age.min, age.max);
-            this.world.enot = numToStr(this.world.enot);
+            this.world.enot = engine.numToStr(this.world.enot);
             this.current = 'ready';
         },
     },
