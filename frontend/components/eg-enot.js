@@ -15,7 +15,6 @@ export default {
         enot_buy: function (age) {
             this.world = engine.init();
             this.world = engine.lunch_buy(this.world, age.min, age.max);
-            this.world.enot = engine.numToStr(this.world.enot);
             this.current = 'ready';
         },
     },

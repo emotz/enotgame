@@ -5,7 +5,6 @@ function numToStr(enot) {
     var res = {};
     res.age = enot.age;
     res.energy = enot.energy;
-    res.cooldown = enot.cooldown;
 
     if (enot.hungry == 0)
         res.hungry = 'голоден';
@@ -32,8 +31,7 @@ function strToNum(enot) {
 
     return res;
 }
-
-module.exports = {
-    strToNum,
-    numToStr
+export default {
+    numToStr,
+    strToNum
 }

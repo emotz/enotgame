@@ -1,7 +1,7 @@
 <template>
     <div v-bind:class="{'night':(world.environment.time%24 >=12)}">
         <div class="enot">
-            <li v-for="(item, index) in world.enot">{{index}} : {{item}}</li>
+            <li v-for="(item, index) in enot">{{index}} : {{item}}</li>
         </div>
         <div class="enot but">
             <button v-on:click="enot_feed">Feed</button>
