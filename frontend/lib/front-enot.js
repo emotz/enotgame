@@ -6,7 +6,7 @@ function numToStr(enot) {
     res.age = enot.age;
     res.energy = enot.energy;
 
-    if (enot.hungry == 0)
+    if (enot.hungry == 1)
         res.hungry = 'голоден';
     else
         res.hungry = 'не голоден';
@@ -22,9 +22,9 @@ function strToNum(enot) {
     res.energy = enot.energy;
 
     if (enot.hungry == 'голоден')
-        res.hungry = 0;
-    else
         res.hungry = 1;
+    else
+        res.hungry = 0;
 
     res.personality = personality.indexOf(enot.personality);
     res.insult = insult.indexOf(enot.insult);

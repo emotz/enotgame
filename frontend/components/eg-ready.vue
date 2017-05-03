@@ -33,23 +33,26 @@
 <script src="./eg-ready.js"></script>
 
 <style>
-.enot{
+.enot {
     display: inline-block;
-    width:31%;
+    width: 31%;
     height: 300px;
     vertical-align: middle;
     padding: 20px;
 }
-#ready{
+
+#ready {
     position: relative;
     margin: 0 auto;
     text-align: center;
 }
+
 .control {
     display: block;
     text-align: center;
     margin-top: 20px;
 }
+
 .control input {
     vertical-align: bottom;
     display: inline-block;
@@ -58,9 +61,11 @@
     font-size: 24px;
     text-align: right;
 }
+
 .comres li {
     text-align: center;
 }
+
 .night {
     background-color: #666
 }
