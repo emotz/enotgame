@@ -103,7 +103,7 @@ function lunch_play(world) {
 function lunch_wait(world, timetowait) {
     let res = {};
     res.environment = clone(world.environment);
-    let newnot = enot_wait(world, timetowait);
+    let newnot = enot_wait(world.enot, timetowait);
     res.environment.time = world.environment.time + timetowait;
     let i = newnot.length;
     if (i > 0) {

@@ -33,7 +33,8 @@ function init_world() {
 
 it('testlunchbuy', function () {
     for (let i = 0; i < 5; i++) {
-        let res = lunch_buy(erondondon, 1, erondondon);
+        let world = init_world();
+        let res = lunch_buy(world, 1, erondondon(2,10));
         testo(res !== undefined, res);
     }
 });
@@ -62,3 +63,14 @@ it('testlunchwait', function () {
         testo(res.environment.time > world.environment.time);
     }
 });
+
+    
+it('test lunch wait dva is sus 23', function () {
+    for (let i = 0; i < 5; i++) {
+        let rnjesus = erondondon(1, 10);
+        let world = init_world();
+        let res = lunch_wait(world, rnjesus);
+        testo(res.enot.energy !== undefined &&  !isNaN(res.enot.energy),res);
+    }
+});
+
