@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import app from '../components/eg-enot.vue';
+import app from './components/eg-enot.vue';
 import {numToStr} from './front-enot.js';
 import engine from 'game/huyengine.js';
 

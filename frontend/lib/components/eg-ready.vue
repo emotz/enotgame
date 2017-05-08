@@ -20,8 +20,12 @@
             <p>Important messages:</p>
             <br>
             <p>
-                <span v-if="enot.energy<30">Energy is low!<br></span>
-                <span v-if="enot.hungry=='голоден'">Enot is hungry!<br></span>
+                <span v-if="enot.energy<30">Energy is low!
+                    <br>
+                </span>
+                <span v-if="enot.hungry=='голоден'">Enot is hungry!
+                    <br>
+                </span>
             </p>
         </div>
         <ul class="comres">
