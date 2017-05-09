@@ -6,10 +6,15 @@ export default {
         enot_buy: function () {
             this.$emit('enot-buy', { max: this.max_age, min: this.min_age })
         },
-        age_control: function () {
-            if (this.min_age < 1) this.min_age = 1;
-            if (this.max_age - this.min_age < 1)
-                this.max_age = this.min_age * 1 + 1;
+    },
+    watch: {
+        min_age: function (val) {
+            if (val < 1) this.min_age = 1;
+            if (val >= this.max_age) this.max_age = val + 1;
+        },
+        max_age: function (val) {
+            if (val <= this.min_age)
+                this.min_age = val - 1;
         }
     }
 }

@@ -9,8 +9,8 @@
                 <br> Maximum age :
             </div>
             <div class="age-2">
-                <input type="number" v-model.number="min_age" v-on:click="age_control" v-on:keyup.enter="age_control">
-                <input type="number" v-model.number="max_age" v-on:click="age_control" v-on:keyup.enter="age_control">
+                <input type="number" v-model.number="min_age">
+                <input type="number" v-model.number="max_age">
             </div>
         </div>
     </div>
