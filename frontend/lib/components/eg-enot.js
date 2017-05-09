@@ -1,5 +1,6 @@
 import eg_create from './eg-create.vue';
 import eg_ready from './eg-ready.vue';
+import engine from 'game/huyengine.js';
 export default {
     data: function () {
         return {

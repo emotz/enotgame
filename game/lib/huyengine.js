@@ -123,5 +123,6 @@ module.exports = {
     lunch_wait: lunch_wait,
     init: init,
     compare,
-    comres
+    comres,
+    clone
 };

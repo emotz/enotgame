@@ -32,5 +32,5 @@ function strToNum(enot) {
     return res;
 }
 export {
-        numToStr, strToNum
-    }
+    numToStr, strToNum
+}

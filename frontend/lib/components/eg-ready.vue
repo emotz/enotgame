@@ -1,7 +1,7 @@
 <template>
-    <div v-bind:class="{'night':(world.environment.time%24 >=12)}">
+    <div v-bind:class="{'night':nighttime}">
         <div class="enot">
-            <li v-for="(item, index) in enot">{{index}} : {{item}}</li>
+            <li v-for="(item, index) in enot_to_display">{{index}} : {{item}}</li>
         </div>
         <div class="enot">
             <div class="control">
@@ -20,10 +20,10 @@
             <p>Important messages:</p>
             <br>
             <p>
-                <span v-if="enot.energy<30">Energy is low!
+                <span v-if="enot_to_display.energy<30">Energy is low!
                     <br>
                 </span>
-                <span v-if="enot.hungry=='голоден'">Enot is hungry!
+                <span v-if="enot_to_display.hungry==='голоден'">Enot is hungry!
                     <br>
                 </span>
             </p>
