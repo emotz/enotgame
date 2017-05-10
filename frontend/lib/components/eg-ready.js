@@ -27,7 +27,7 @@ export default {
     },
     watch: {
         world(new_val, old_val) {
-            this.comres = engine.comres(engine.compare(new_val.enot, old_val.enot));
+            this.comres = engine.comres(engine.compare(old_val.enot, new_val.enot));
         },
     },
     computed: {
