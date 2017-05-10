@@ -20,7 +20,7 @@ module.exports = {
     plugins: [
         new CopyWebpackPlugin([{
             from: './static',
-            to: './dist'
+            to: './dist',
         }, ]),
     ],
 };
