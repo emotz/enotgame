@@ -6,11 +6,13 @@ module.exports = {
         filename: './dist/bundle.js',
     },
     module: {
-        loaders: [{
-            test: /\.vue$/,
-            exclude: /node_modules/,
-            loader: 'vue-loader',
-        }, ],
+        loaders: [
+            {
+                test: /\.vue$/,
+                exclude: /node_modules/,
+                loader: 'vue-loader',
+            },
+        ],
     },
     resolve: {
         alias: {
@@ -18,9 +20,11 @@ module.exports = {
         },
     },
     plugins: [
-        new CopyWebpackPlugin([{
-            from: './static',
-            to: './dist',
-        }, ]),
+        new CopyWebpackPlugin([
+            {
+                from: './static',
+                to: './dist',
+            },
+        ]),
     ],
 };
