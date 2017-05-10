@@ -1,10 +1,10 @@
 export default {
     data: function () {
-        return { min_age: 1, max_age: 2 }
+        return { min_age: 1, max_age: 2 };
     },
     methods: {
         enot_buy: function () {
-            this.$emit('enot-buy', { max: this.max_age, min: this.min_age })
+            this.$emit('enot-buy', { max: this.max_age, min: this.min_age });
         },
     },
     watch: {
@@ -15,6 +15,6 @@ export default {
         max_age: function (val) {
             if (val <= this.min_age)
                 this.min_age = val - 1;
-        }
-    }
-}
+        },
+    },
+};

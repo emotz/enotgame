@@ -8,29 +8,28 @@ export default {
             comres: ['Вы купили енота'],
             ttw: 1,
             world: this.initworld,
-            tmp_world: {},
-        }
+        };
     },
     methods: {
         enot_feed: function () {
-            this.tmp_world = engine.lunch_feed(this.world);
-            this.comres = engine.comres(engine.compare(this.world.enot, this.tmp_world.enot));
-            this.world = engine.clone(this.tmp_world);
+            let tmp_world = engine.lunch_feed(this.world);
+            this.comres = engine.comres(engine.compare(this.world.enot, tmp_world.enot));
+            this.world = tmp_world;
         },
         enot_play: function () {
-            this.tmp_world = engine.lunch_play(this.world);
-            this.comres = engine.comres(engine.compare(this.world.enot, this.tmp_world.enot));
-            this.world = engine.clone(this.tmp_world);
+            let tmp_world = engine.lunch_play(this.world);
+            this.comres = engine.comres(engine.compare(this.world.enot, tmp_world.enot));
+            this.world = tmp_world;
         },
         enot_wait: function () {
-            this.tmp_world = engine.lunch_wait(this.world, this.ttw);
+            let tmp_world = engine.lunch_wait(this.world, this.ttw);
             this.ttw = 1;
-            this.comres = engine.comres(engine.compare(this.world.enot, this.tmp_world.enot));
-            this.world = engine.clone(this.tmp_world);
+            this.comres = engine.comres(engine.compare(this.world.enot, tmp_world.enot));
+            this.world = tmp_world;
         },
         ttw_control: function () {
             if (this.ttw < 1) this.ttw = 1;
-        }
+        },
     },
     computed: {
         enot_to_display: function () {
@@ -43,7 +42,6 @@ export default {
         },
         nighttime: function () {
             return time.is_nighttime(this.world.environment.time);
-        }
-    }
-
-}
+        },
+    },
+};

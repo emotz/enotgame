@@ -5,8 +5,8 @@ export default {
     data: function () {
         return {
             current: 'create',
-            world: {}
-        }
+            world: {},
+        };
     },
     components: {
         'eg-create': eg_create,
@@ -19,4 +19,4 @@ export default {
             this.current = 'ready';
         },
     },
-}
+};
