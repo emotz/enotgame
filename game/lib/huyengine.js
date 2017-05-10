@@ -54,7 +54,7 @@ function init() {
  * Запускает функцию {@link module:enot~enot_buy}.
  * @param {World} world
  * @param {Number} min_age Минимальный возраст енота (должен быть указан пользователем, по идее)
- * @param {Number} max_age Максимальный возрас енота не включительно (должен быть указан юзверем...нно это не точно)
+ * @param {Number} max_age Максимальный возраст енота не включительно (должен быть указан юзверем...нно это не точно)
  * @returns {World}
  */
 function lunch_buy(world, min_age, max_age) {
@@ -67,7 +67,7 @@ function lunch_buy(world, min_age, max_age) {
 /**
  * Запускает функцию {@link module:enot~enot_feed}.
  * @param {World} world
- * @returns {World} Не изменяет world, а создает новый.
+ * @returns {World} Не изменяет world, а создаёт новый.
  */
 function lunch_feed(world) {
     let res = {};
@@ -82,7 +82,7 @@ function lunch_feed(world) {
 /**
  * Запускает функцию {@link module:enot~enot_play}.
  * @param {World} world 
- * @returns {World} Не изменяет world, а создает новый.
+ * @returns {World} Не изменяет world, а создаёт новый.
  */
 function lunch_play(world) {
     let res = {};
@@ -97,8 +97,8 @@ function lunch_play(world) {
 /**
  * Запускает функцию {@link module:enot~enot_wait}.
  * @param {World} world 
- * @param {Number} timetowait Время ожидания (число минут), в течение которого с енотом могут проиходить всякие ништяки; должно указываться пользователем. 
- * @returns {World} Не изменяет world, а создает новый.
+ * @param {Number} timetowait Время ожидания (число минут), в течение которого с енотом могут происходить всякие ништяки; должно указываться пользователем. 
+ * @returns {World} Не изменяет world, а создаёт новый.
  */
 function lunch_wait(world, timetowait) {
     let res = {};

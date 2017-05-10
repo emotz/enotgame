@@ -4,25 +4,23 @@ module.exports = {
     entry: './lib/main.js',
     output: {
         filename: './dist/bundle.js',
-        library: 'engine'
     },
     module: {
-        loaders: [
-            {
-                test: /\.vue$/,
-                exclude: /node_modules/,
-                loader: 'vue-loader'
-            },
-        ]
+        loaders: [{
+            test: /\.vue$/,
+            exclude: /node_modules/,
+            loader: 'vue-loader',
+        }, ],
     },
     resolve: {
         alias: {
-            game: path.resolve(__dirname,'../game/lib/'),
-}
+            game: path.resolve(__dirname, '../game/lib/'),
+        },
     },
     plugins: [
-        new CopyWebpackPlugin([
-            { from: './static', to: './dist' }
-        ])
-    ]
-}
+        new CopyWebpackPlugin([{
+            from: './static',
+            to: './dist'
+        }, ]),
+    ],
+};

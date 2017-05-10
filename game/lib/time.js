@@ -3,13 +3,16 @@
  */
 
 /**
- * Проверяет время на предмет времени суток, с 0 до 12 считается днем.
+ * Проверяет время на предмет времени суток, с 0 до 12 считается днём.
  * @param {Number} time Число минут
  * @returns {Boolean} 
  */
 function is_daytime(time) {
-    if (time % 24 <= 12) { return true; }
-    else { return false; }
+    if (time % 24 <= 12) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 /**
@@ -18,8 +21,11 @@ function is_daytime(time) {
  * @returns {Boolean}
  */
 function is_nighttime(time) {
-    if (time % 24 > 12) { return true; }
-    else { return false; }
+    if (time % 24 > 12) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 /////////////////////////exports//////////////////////////////
