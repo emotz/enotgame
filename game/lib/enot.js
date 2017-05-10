@@ -9,7 +9,7 @@
  * @property {Number} energy       
  * Энергия енота (может меняться от 0 до 100 включительно).
  * @property {Number} hungry      
- * Голоден ли енот (0 если голоден, 1 если нет, но это не точно).
+ * Голоден ли енот (1 если голоден, 0 если нет, но это не точно).
  * @property {Number} insult 
  * Степень обиженности енота. Может принимать одно из 
  * значений от 0 до 6.
@@ -55,17 +55,39 @@ let erondondon = utility.erondondon;
  */
 function comres(obj) {
     let res = [];
-    if (obj.age !== 0) { res.push(`Ваш енотик празднует день рождения!Не забудьте купить тортик!ведь он стал на ${obj.age} лет старше.`); }
-    if (obj.energy !== 0 && obj.energy > 0) { res.push('Это ено энерджайзер!Его энергия растет и увеличивается на ' + obj.energy + ' очков.'); }
-    if (obj.energy !== 0 && obj.energy < 0) { res.push('Ваш унылый енот стал еще унылее и потерял ' + obj.energy + ' энергии.'); }
-    if (obj.hungry !== 0 && obj.hungry > 0) { res.push('Енот проголодался.'); }
-    if (obj.hungry !== 0 && obj.hungry < 0) { res.push('Енот наелся.'); }
-    if (obj.personality !== 0 && obj.personality > 0) { res.push('Енот в силу жизненных обсоятельств долго думал над своим поведением и стал еще более неадекватным.'); }
-    if (obj.personality !== 0 && obj.personality < 0) { res.push('Енот в силу жизненных обсоятельств долго думал над своим поведением и стал менее неадекватным.'); }
-    if (obj.insult !== 0 && obj.insult > 0) { res.push('Твой енот ненавидит тебя еще больше чем раньше. И думает разное о твоей маме! В следующий раз тебе стоит подумать дважды, прежде чем связываться с ним.'); }
-    if (obj.insult !== 0 && obj.insult < 0) { res.push('Папочка енот доволен своим белым рабом, продолжай в тоже духе, и, возможно, он станет к тебе благосклонен.'); }
-    if (obj.cooldown !== 0 && obj.cooldown > 0) { res.push('Енот устал и будет недоступен для дальнейшего теребоньканья в течение ' + obj.cooldown + ' времени.'); }
-    if (obj.cooldown !== 0 && obj.cooldown < 0) { res.push('Енотик копит свои силы чтобы стать самураем!'); }
+    if (obj.age !== 0) {
+        res.push(`Ваш енотик празднует день рождения! Не забудьте купить тортик! Ведь он стал на ${obj.age} лет старше.`);
+    }
+    if (obj.energy !== 0 && obj.energy > 0) {
+        res.push('Это енот энерджайзер! Его энергия растёт и увеличивается на ' + obj.energy + ' очков.');
+    }
+    if (obj.energy !== 0 && obj.energy < 0) {
+        res.push('Ваш унылый енот стал ещё унылее и потерял ' + obj.energy + ' энергии.');
+    }
+    if (obj.hungry !== 0 && obj.hungry > 0) {
+        res.push('Енот проголодался.');
+    }
+    if (obj.hungry !== 0 && obj.hungry < 0) {
+        res.push('Енот наелся.');
+    }
+    if (obj.personality !== 0 && obj.personality > 0) {
+        res.push('Енот в силу жизненных обстоятельств долго думал над своим поведением и стал ещё более неадекватным.');
+    }
+    if (obj.personality !== 0 && obj.personality < 0) {
+        res.push('Енот в силу жизненных обстоятельств долго думал над своим поведением и стал менее неадекватным.');
+    }
+    if (obj.insult !== 0 && obj.insult > 0) {
+        res.push('Твой енот ненавидит тебя ещё больше чем раньше. И думает разное о твоей маме! В следующий раз тебе стоит подумать дважды, прежде чем связываться с ним.');
+    }
+    if (obj.insult !== 0 && obj.insult < 0) {
+        res.push('Папочка енот доволен своим белым рабом, продолжай в тоже духе, и, возможно, он станет к тебе благосклонен.');
+    }
+    if (obj.cooldown !== 0 && obj.cooldown > 0) {
+        res.push('Енот устал и будет недоступен для дальнейшего теребоньканья в течение ' + obj.cooldown + ' времени.');
+    }
+    if (obj.cooldown !== 0 && obj.cooldown < 0) {
+        res.push('Енотик копит свои силы чтобы стать самураем!');
+    }
     return res;
 }
 
@@ -82,25 +104,38 @@ function compare(enot, enotnew) {
     for (let prop in obj1) {
         if (obj1[prop] !== obj2[prop]) {
             res[prop] = obj2[prop] - obj1[prop];
+        } else {
+            res[prop] = 0;
         }
-        else { res[prop] = 0; }
     }
     return res;
 }
 
 /**
- * Сравнивает два енота; в случае несоответствия хотя бы одного параметра у двух переданых енотов, возвращает false.
+ * Сравнивает два енота; в случае несоответствия хотя бы одного параметра у двух переданных енотов, возвращает false.
  * @param {Enot} enot Сравниваемый енот номер раз.
  * @param {Enot} enotdva Сравниваемый енот номер дваз.
  * @returns {Boolean} 
  */
 function eq(enot, enotdva) {
-    if (enot.age !== enotdva.age) { return false; }
-    if (enot.energy !== enotdva.energy) { return false; }
-    if (enot.hungry !== enotdva.hungry) { return false; }
-    if (enot.personality !== enotdva.personality) { return false; }
-    if (enot.insult !== enotdva.insult) { return false; }
-    if (enot.cooldown !== enotdva.cooldown) { return false; }
+    if (enot.age !== enotdva.age) {
+        return false;
+    }
+    if (enot.energy !== enotdva.energy) {
+        return false;
+    }
+    if (enot.hungry !== enotdva.hungry) {
+        return false;
+    }
+    if (enot.personality !== enotdva.personality) {
+        return false;
+    }
+    if (enot.insult !== enotdva.insult) {
+        return false;
+    }
+    if (enot.cooldown !== enotdva.cooldown) {
+        return false;
+    }
     return true;
 }
 
@@ -120,31 +155,37 @@ function eq(enot, enotdva) {
  */
 function enot_buy(min_age, max_age) {
     let res = {};
-    if (min_age < 1 || min_age > max_age) { res = "Еггог: input parameters are not valid"; }
-    else {
+    if (min_age < 1 || min_age > max_age) {
+        res = "Еггог: input parameters are not valid";
+    } else {
         res.age = erondondon(min_age, max_age);
         res.energy = erondondon(1, 100);
         res.hungry = erondondon(0, 2);
         res.personality = erondondon(0, 3);
         res.cooldown = 0;
-        if (res.personality === 0) { res.insult = 0; }
-        else { res.insult = erondondon(1, 7); }
+        if (res.personality === 0) {
+            res.insult = 0;
+        } else {
+            res.insult = erondondon(1, 7);
+        }
     }
     return res;
 }
 
 /**
- * Кормежка енота. Подчиняется следующим правилам:
+ * Кормёжка енота. Подчиняется следующим правилам:
  * При попытке накормить голодного енота он становится неголодным, а уровень обиды 
  * понижается на 1 (напр. с 2 до 1).
  * При попытке накормить неголодного енота его уровень обиды вырастает на один, а у 
  * енотов с personality 2 - на 2.
  * В случае успешного кормления (т.е. если енот был голоден) его энергия увеличивается на 20.
  * @param {Enot} enot 
- * @returns {Enot} Функция не меняет изначального енота, а создает нового.
+ * @returns {Enot} Функция не меняет изначального енота, а создаёт нового.
  */
 function enot_feed(enot) {
-    if (is_nighttime()) { return clone(enot); }
+    if (is_nighttime()) {
+        return clone(enot);
+    }
     let res = {};
     res.age = enot.age;
     res.personality = enot.personality;
@@ -152,12 +193,13 @@ function enot_feed(enot) {
         res.hungry = 0;
         res.energy = enot.energy + 20;
         res.insult = enot.insult - 1;
-    }
-    else {
+    } else {
         res.hungry = 0;
         res.energy = enot.energy;
         res.insult = enot.insult + 1;
-        if (enot.personality === 2) { res.insult++; }
+        if (enot.personality === 2) {
+            res.insult++;
+        }
     }
     res.cooldown = 5;
     return val(res);
@@ -173,26 +215,36 @@ function enot_feed(enot) {
  * либо понизится, либо повысится с 50% вероятностью.
  * Любой енот после игры теряет 10 энергии и с 30% вероятностью становится голоден.
  * @param {Enot} enot 
- * @returns {Enot} Функция не меняет изначального енота, а создает нового.
+ * @returns {Enot} Функция не меняет изначального енота, а создаёт нового.
  */
 function enot_play(enot) {
     let res = clone(enot);
     if (res.personality === 0) {
         res.insult--;
+    } else if (res.personality === 1) {
+        if (erondondon(1, 100) <= 50) {
+            res.insult--;
+        } else {
+            res.insult = res.insult;
+        }
+    } else if (res.personality === 2) {
+        if (erondondon(1, 100) <= 50) {
+            res.insult--;
+        } else {
+            res.insult++;
+        }
     }
-    else if (res.personality === 1) {
-        if (erondondon(1, 100) <= 50) { res.insult--; }
-        else { res.insult = res.insult; }
+    if (erondondon(1, 100) <= 30) {
+        res.hungry = 1;
+    } else {
+        res.hungry = res.hungry;
     }
-    else if (res.personality === 2) {
-        if (erondondon(1, 100) <= 50) { res.insult--; }
-        else { res.insult++; }
-    }
-    if (erondondon(1, 100) <= 30) { res.hungry = 1; }
-    else { res.hungry = res.hungry; }
     res.energy = res.energy - 10;
-    if (is_daytime()) { res.cooldown = 10; }
-    else { res.cooldown = 5; }
+    if (is_daytime()) {
+        res.cooldown = 10;
+    } else {
+        res.cooldown = 5;
+    }
     return val(res);
 }
 
@@ -202,10 +254,10 @@ function enot_play(enot) {
  * енот находится в режиме ожидания, и каждую минуту с ним может произойти рандомное событие
  * события описаны в модуле enotevents.js.
  * вероятность происхождения события указана в разделе enotevents.
- * Результатом является массив с объектами, в каждом объекте первое значение-описание
+ * Результатом является массив с объектами, в каждом объекте первое значение - описание
  * @param {Enot} enot 
  * @param {Number} timetowait Количество минут для ожидания.
- * @return {Enot} Функция не меняет изначального енота, а создает нового.
+ * @return {Enot} Функция не меняет изначального енота, а создаёт нового.
  */
 function enot_wait(enot, timetowait) {
     let res = [];
@@ -214,7 +266,10 @@ function enot_wait(enot, timetowait) {
         if (erondondon(1, 100) < 30) {
             let newevent = enotevents.choosevent();
             tmp = newevent.action(tmp);
-            res.push({ event: newevent.description, resultEnot: tmp });
+            res.push({
+                event: newevent.description,
+                resultEnot: tmp
+            });
         }
     }
     return res;

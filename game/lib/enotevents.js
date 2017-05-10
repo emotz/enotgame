@@ -15,27 +15,27 @@ let clone = utility.clone;
 let erondondon = utility.erondondon;
 
 /**
- * Contains events that can possibly happen with enot.
+ * Содержит события, которые могут произойти с енотом.
  * @var
  */
 let enotevents = {
     wash: {
-        description: 'енот нашел где ты прячешь свой телефон, помыл его и стал немного довольнее',
+        description: 'енот нашёл где ты прячешь свой телефон, помыл его и стал немного довольнее',
         action: wash,
         prob_weight: 20
     },
     selffeed: {
-        description: 'енот нашел под кроватью пропавшую ранее печеньку и ликвидировал ее',
+        description: 'енот нашёл под кроватью пропавшую ранее печеньку и ликвидировал ее',
         action: selffeed,
         prob_weight: 50
     },
     starving: {
-        description: 'енот увидел как жрешь и теперь тоже голоден',
+        description: 'енот увидел как жрёшь и теперь тоже голоден',
         action: starving,
         prob_weight: 15
     },
     fight: {
-        description: 'енот напал на тохину сестру и она больше его не заебывает, во время нападения енот устал и проголодался',
+        description: 'енот напал на Тохину сестру и она больше его не заёбывает, во время нападения енот устал и проголодался',
         action: fight,
         prob_weight: 100
     }
@@ -43,7 +43,7 @@ let enotevents = {
 
 /**
  * Запускает событие <code>fight</code>.
- * По итогу выполнения функции енот проголодается и потеряет 30 энергии, но зато наваляет тохиной сестре.
+ * По итогу выполнения функции енот проголодается и потеряет 30 энергии, но зато наваляет Тохиной сестре.
  * @param {Enot} enot 
  * @returns {Enot}
  */
@@ -80,7 +80,7 @@ function selffeed(enot) {
 }
 /**
  * Запускает событие <code>wash</code>.
- * По итогу выолнения функции енот станет голоден, и его настроение улучшится на одно значение.
+ * По итогу выполнения функции енот станет голоден, и его настроение улучшится на одно значение.
  * @param {Enot} enot 
  * @returns {Enot}
  */
@@ -96,7 +96,7 @@ function wash(enot) {
  * Работает по принципу выбрасывания рандомного числа в диапазоне, где минимальное значение 1, а максимальное это общая сумма всех 
  * свойств prob_weight из объекта {@link module:enotevents~enotevents}.
  * @returns {EnotEvent} 
- * @throws {Error} Вообщето эта ошибка не должна никогда выпадать, но ДИМАС мэйд ми ду ит.
+ * @throws {Error} Вообще-то эта ошибка не должна никогда выпадать, но ДИМАС мэйд ми ду ит.
  */
 function choosevent() {
     let totalprob = 0;
@@ -107,8 +107,7 @@ function choosevent() {
     for (let event in enotevents) {
         if (enotevents[event].prob_weight > rnjesus) {
             return enotevents[event];
-        }
-        else rnjesus = rnjesus - enotevents[event].prob_weight;
+        } else rnjesus = rnjesus - enotevents[event].prob_weight;
     }
     throw new Error('всегда должен быть ивент');
 }
