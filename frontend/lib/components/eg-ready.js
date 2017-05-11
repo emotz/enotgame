@@ -3,7 +3,7 @@ import { numToStr } from '../front-enot.js';
 import time from 'game/time.js';
 export default {
     props: ['initworld'],
-    data: function() {
+    data: function () {
         return {
             comres: ['Вы купили енота'],
             ttw: 1,
@@ -11,17 +11,17 @@ export default {
         };
     },
     methods: {
-        enot_feed: function() {
+        enot_feed: function () {
             this.world = engine.lunch_feed(this.world);
         },
-        enot_play: function() {
+        enot_play: function () {
             this.world = engine.lunch_play(this.world);
         },
-        enot_wait: function() {
+        enot_wait: function () {
             this.world = engine.lunch_wait(this.world, this.ttw);
             this.ttw = 1;
         },
-        ttw_control: function() {
+        ttw_control: function () {
             if (this.ttw < 1) this.ttw = 1;
         },
     },
@@ -31,7 +31,7 @@ export default {
         },
     },
     computed: {
-        enot_to_display: function() {
+        enot_to_display: function () {
             const res = {};
             for (const i in this.world.enot) {
                 if (i === 'cooldown') continue;
@@ -39,7 +39,7 @@ export default {
             }
             return numToStr(res);
         },
-        nighttime: function() {
+        nighttime: function () {
             return time.is_nighttime(this.world.environment.time);
         },
     },
