@@ -12,29 +12,28 @@ export default {
     },
     methods: {
         enot_feed: function () {
-            let tmp_world = engine.lunch_feed(this.world);
-            this.comres = engine.comres(engine.compare(this.world.enot, tmp_world.enot));
-            this.world = tmp_world;
+            this.world = engine.lunch_feed(this.world);
         },
         enot_play: function () {
-            let tmp_world = engine.lunch_play(this.world);
-            this.comres = engine.comres(engine.compare(this.world.enot, tmp_world.enot));
-            this.world = tmp_world;
+            this.world = engine.lunch_play(this.world);
         },
         enot_wait: function () {
-            let tmp_world = engine.lunch_wait(this.world, this.ttw);
+            this.world = engine.lunch_wait(this.world, this.ttw);
             this.ttw = 1;
-            this.comres = engine.comres(engine.compare(this.world.enot, tmp_world.enot));
-            this.world = tmp_world;
         },
         ttw_control: function () {
             if (this.ttw < 1) this.ttw = 1;
         },
     },
+    watch: {
+        world(new_val, old_val) {
+            this.comres = engine.comres(engine.compare(old_val.enot, new_val.enot));
+        },
+    },
     computed: {
         enot_to_display: function () {
-            let res = {};
-            for (let i in this.world.enot) {
+            const res = {};
+            for (const i in this.world.enot) {
                 if (i === 'cooldown') continue;
                 res[i] = this.world.enot[i];
             }
