@@ -3,5 +3,6 @@
         "**/out": true,
         "**/node_modules": true
     },
-    "eslint.enable": true
+    "eslint.enable": true,
+    "javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false
 }

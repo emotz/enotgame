@@ -31,15 +31,15 @@ function init_world() {
     return res;
 }
 
-it('testlunchbuy', function () {
+it('testlunchbuy', function() {
     for (let i = 0; i < 5; i++) {
         let world = init_world();
-        let res = lunch_buy(world, 1, erondondon(2,10));
+        let res = lunch_buy(world, 1, erondondon(2, 10));
         testo(res !== undefined, res);
     }
 });
 
-it('testlunchplay', function () {
+it('testlunchplay', function() {
     for (let i = 0; i < 5; i++) {
         let world = init_world();
         let res = lunch_play(world);
@@ -47,7 +47,7 @@ it('testlunchplay', function () {
     }
 });
 
-it('testlunchfeed', function () {
+it('testlunchfeed', function() {
     for (let i = 0; i < 5; i++) {
         let world = init_world();
         let res = lunch_feed(world);
@@ -55,7 +55,7 @@ it('testlunchfeed', function () {
     }
 });
 
-it('testlunchwait', function () {
+it('testlunchwait', function() {
     for (let i = 0; i < 5; i++) {
         let rnjesus = erondondon(1, 10);
         let world = init_world();
@@ -64,13 +64,13 @@ it('testlunchwait', function () {
     }
 });
 
-    
-it('test lunch wait dva is sus 23', function () {
+
+it('test lunch wait dva is sus 23', function() {
     for (let i = 0; i < 5; i++) {
         let rnjesus = erondondon(1, 10);
         let world = init_world();
         let res = lunch_wait(world, rnjesus);
-        testo(res.enot.energy !== undefined &&  !isNaN(res.enot.energy),res);
+        testo(res.enot.energy !== undefined && !isNaN(res.enot.energy), res);
     }
 });
 

@@ -15,7 +15,7 @@ let testhelper = require('./testhelper.js');
 let testo = testhelper.testo;
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
-it("testenotplay", function () {
+it("testenotplay", function() {
     for (let i = 0; i < 3; i++) {
         let enot = enot_buy(1, 100);
         let clon = clone(enot);
@@ -24,7 +24,7 @@ it("testenotplay", function () {
     }
 });
 
-it("testenothungry", function () {
+it("testenothungry", function() {
     let hungryenot = {
         age: 2,
         energy: 24,
@@ -36,7 +36,7 @@ it("testenothungry", function () {
     testo(jopa.hungry !== undefined);
 });
 
-it("comparetest", function () {
+it("comparetest", function() {
     let enot1 = {
         age: 15,
         energy: 76,

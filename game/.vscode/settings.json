@@ -3,5 +3,6 @@
         "**/out": true,
         "**/node_modules": true,
         "package.json": true
-    }
+    },
+    "javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false
 }
